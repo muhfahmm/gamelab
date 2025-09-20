@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+            margin: 20px;
+        }
+
+        video {
+            margin: 20px 0;
+            max-width: 80%;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <video controls height="300" width="500">
+        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4"
+            type="video/mp4">
+    </video>
+    <br>
+    <canvas id="judulCanvas" width="500" height="100"></canvas>
+    <script>
+        var canvas = document.getElementById("judulCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.fillText("Judul Video: Belajar HTML Media", canvas.width / 2, canvas.height / 2);
+    </script>
+</body>
+
+</html>
