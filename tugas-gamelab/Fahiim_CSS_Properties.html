@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar Film Terbaru</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .container {
+            padding: 50px 8%;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card-content {
+            background-color: #1e293b;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .card-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 390px;
+        }
+
+        .card-title {
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 12px;
+            gap: 10px;
+        }
+
+        .card-button button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Daftar Film Terbaru</h1>
+        <div class="wrapper">
+            <div class="card-wrapper">
+                <!-- CARD 1 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/black panthers of ww2.jpg" alt="Black Panthers of WW2">
+                    </div>
+                    <div class="card-title">
+                        <h3>Black Panthers of WW2</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/captain america.jpeg" alt="Captain America">
+                    </div>
+                    <div class="card-title">
+                        <h3>Captain America</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/f1.jpg" alt="F1">
+                    </div>
+                    <div class="card-title">
+                        <h3>F1</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/jumbo.jpg" alt="Jumbo">
+                    </div>
+                    <div class="card-title">
+                        <h3>Jumbo</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/jurasic world.jpg" alt="Jurassic World">
+                    </div>
+                    <div class="card-title">
+                        <h3>Jurassic World</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/minecraft.jpeg" alt="Minecraft Movie">
+                    </div>
+                    <div class="card-title">
+                        <h3>Minecraft Movie</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 7 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/pamali.jpg" alt="Pamali">
+                    </div>
+                    <div class="card-title">
+                        <h3>Pamali</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <!-- CARD 8 -->
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/venom.jpg" alt="Venom">
+                    </div>
+                    <div class="card-title">
+                        <h3>Venom</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
