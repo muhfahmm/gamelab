@@ -15,6 +15,7 @@
         .nav-container {
             padding: 0 20%;
         }
+
         .nav-container {
             background-color: red;
             height: 50px;
@@ -62,17 +63,17 @@
     <section class="container">
         <div class="nav-container">
             <div class="wrapper">
-            <div class="logo">
-                <h1>Fahiim</h1>
+                <div class="logo">
+                    <h1>Fahiim</h1>
+                </div>
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About Me</a></li>
+                        <li><a href="">Contact Me</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="nav-menu">
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">About Me</a></li>
-                    <li><a href="">Contact Me</a></li>
-                </ul>
-            </div>
-        </div>
         </div>
     </section>
     <section class="container">
@@ -81,32 +82,60 @@
                 <style>
                     .content-container {
                         padding: 0 20%;
+                        margin-top: 30px;
                     }
-                .content-wrapper {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .description {
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
-                    flex: 1;
-                    margin-left: 25px;
-                }
-                .img-aku img {
-                    height: 500px;
-                    max-width: 100%;
-                    object-fit: cover;
-                }
-                .first {
-                    font-size: 25px;
-                }
-                .second {
-                    font-size: 50px;
-                }
-                .third {
-                    font-size: 25px;
-                }
+
+                    .content-wrapper {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    .description {
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: column;
+                        flex: 1;
+                        margin-left: 25px;
+                    }
+
+                    .img-aku img {
+                        height: 500px;
+                        max-width: 100%;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+
+                    .first {
+                        font-size: 25px;
+                    }
+
+                    .second {
+                        font-size: 50px;
+                    }
+
+                    .third {
+                        font-size: 25px;
+                    }
+
+                    .social-media {
+                        font-size: 20px;
+                        display: flex;
+                        gap: 20px;
+                        margin-top: 10px;
+
+                    }
+
+                    .social-media i {
+                        font-size: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .social-media a {
+                        text-decoration: none;
+                        color: black;
+                    }
                 </style>
                 <div class="img-aku">
                     <img src="aku.jpg">
@@ -114,9 +143,34 @@
                 <div class="description">
                     <p class="first">Hi, I'm Muhammad Fahiim Musthofa</p>
                     <h1 class="second">I'm a Fullstack Developer</h1>
-                    <p class="third">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, natus architecto modi quaerat molestias, expedita ea porro ex dolores quisquam asperiores! Nobis voluptatibus culpa dicta modi voluptate ad distinctio fugiat.</p>
+                    <p class="third">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, natus architecto
+                        modi quaerat molestias, expedita ea porro ex dolores quisquam asperiores! Nobis voluptatibus
+                        culpa dicta modi voluptate ad distinctio fugiat.</p>
                     <div class="social-media">
-
+                        <a href="https://github.com/muhfahmm" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-github"></i>
+                            </div>
+                            <div class="medsos-name">
+                                Github
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/_muhfhmm/" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-instagram"></i>
+                            </div>
+                            <div class="medsos-name">
+                                Instagram
+                            </div>
+                        </a>
+                        <a href="https://www.threads.com/@_muhfhmm" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-threads"></i>
+                            </div>
+                            <div class="medsos-name">
+                                Threads
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
