@@ -5,177 +5,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         * {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
         }
-
-        .nav-container {
-            padding: 0 20%;
-        }
-
-        .nav-container {
-            background-color: red;
-            height: 50px;
-            display: flex;
-            align-items: center;
-        }
-
-        .wrapper {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            align-items: center;
-        }
-
-        .logo h1 {
-            font-size: 25px;
-            margin: 0;
-            font-weight: 400px;
-            font-family: Verdana;
-            color: white;
-        }
-
-        .nav-menu ul {
-            display: flex;
-            gap: 10px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            font-size: 20px;
-            color: white;
-            font-family: Lucida Sans;
-        }
-
-        .nav-menu a:hover {
-            color: blue;
-            transition: .5s;
-        }
     </style>
-
 </head>
 
 <body>
-    <section class="container">
-        <div class="nav-container">
-            <div class="wrapper">
-                <div class="logo">
-                    <h1>Fahiim</h1>
-                </div>
-                <div class="nav-menu">
-                    <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About Me</a></li>
-                        <li><a href="">Contact Me</a></li>
-                    </ul>
-                </div>
+
+    <div class="nav-container">
+        <style>
+            .nav-container {
+                position: sticky;
+                top: 0;
+                background-color: red;
+                padding: 0 20%;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .wrapper {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                align-items: center;
+            }
+
+            .logo h1 {
+                font-size: 25px;
+                margin: 0;
+                font-weight: 400;
+                font-family: Verdana;
+                color: white;
+            }
+
+            .nav-menu ul {
+                display: flex;
+                gap: 10px;
+                list-style: none;
+            }
+
+            .nav-menu a {
+                text-decoration: none;
+                font-size: 20px;
+                color: white;
+                font-family: Lucida Sans;
+            }
+
+            .nav-menu a:hover {
+                color: blue;
+                transition: .5s;
+            }
+        </style>
+        <div class="wrapper">
+            <div class="logo">
+                <h1>Fahiim</h1>
+            </div>
+            <div class="nav-menu">
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About Me</a></li>
+                    <li><a href="">Contact Me</a></li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+
     <section class="container">
+        <style>
+            .content-container {
+                padding: 0 20%;
+                margin-top: 30px;
+            }
+
+            .content-wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .description {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                flex: 1;
+                margin-left: 25px;
+            }
+
+            .img-aku img {
+                height: 500px;
+                max-width: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            .first {
+                font-size: 25px;
+            }
+
+            .second {
+                font-size: 50px;
+            }
+
+            .third {
+                font-size: 25px;
+            }
+
+            .social-media {
+                font-size: 20px;
+                display: flex;
+                gap: 20px;
+                margin-top: 10px;
+            }
+
+            .social-media i {
+                font-size: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .social-media a {
+                text-decoration: none;
+                color: black;
+            }
+        </style>
         <div class="content-container">
             <div class="content-wrapper">
-                <style>
-                    .content-container {
-                        padding: 0 20%;
-                        margin-top: 30px;
-                    }
-
-                    .content-wrapper {
-                        display: flex;
-                        justify-content: space-between;
-                    }
-
-                    .description {
-                        display: flex;
-                        justify-content: center;
-                        flex-direction: column;
-                        flex: 1;
-                        margin-left: 25px;
-                    }
-
-                    .img-aku img {
-                        height: 500px;
-                        max-width: 100%;
-                        object-fit: cover;
-                        border-radius: 10px;
-                    }
-
-                    .first {
-                        font-size: 25px;
-                    }
-
-                    .second {
-                        font-size: 50px;
-                    }
-
-                    .third {
-                        font-size: 25px;
-                    }
-
-                    .social-media {
-                        font-size: 20px;
-                        display: flex;
-                        gap: 20px;
-                        margin-top: 10px;
-
-                    }
-
-                    .social-media i {
-                        font-size: 30px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-
-                    .social-media a {
-                        text-decoration: none;
-                        color: black;
-                    }
-                </style>
                 <div class="img-aku">
-                    <img src="aku.jpg">
+                    <img src="./assets tugas 2/aku.jpg">
                 </div>
                 <div class="description">
                     <p class="first">Hi, I'm Muhammad Fahiim Musthofa</p>
                     <h1 class="second">I'm a Fullstack Developer</h1>
-                    <p class="third">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, natus architecto
-                        modi quaerat molestias, expedita ea porro ex dolores quisquam asperiores! Nobis voluptatibus
-                        culpa dicta modi voluptate ad distinctio fugiat.</p>
+                    <p class="third">Halo Semuanya! Saya adalah seorang junior fullstack developer yang fokus di
+                        pengembangan web menggunakan teknologi seperti
+                        <strong>PHP Native</strong>, <strong>Vanilla JavaScript</strong>, serta desain antarmuka
+                        menggunakan <strong>Bootstrap</strong> dan <strong>Tailwind CSS</strong> Selain itu saya juga
+                        belajar web desain menggunakan <strong>Figma</strong>.
+                    </p>
                     <div class="social-media">
                         <a href="https://github.com/muhfahmm" target="_blank">
                             <div class="medsos-icon">
                                 <i class="bi bi-github"></i>
                             </div>
-                            <div class="medsos-name">
-                                Github
-                            </div>
+                            <div class="medsos-name">Github</div>
                         </a>
                         <a href="https://www.instagram.com/_muhfhmm/" target="_blank">
                             <div class="medsos-icon">
                                 <i class="bi bi-instagram"></i>
                             </div>
-                            <div class="medsos-name">
-                                Instagram
-                            </div>
+                            <div class="medsos-name">Instagram</div>
                         </a>
                         <a href="https://www.threads.com/@_muhfhmm" target="_blank">
                             <div class="medsos-icon">
                                 <i class="bi bi-threads"></i>
                             </div>
-                            <div class="medsos-name">
-                                Threads
-                            </div>
+                            <div class="medsos-name">Threads</div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="container-skills" id="skills">
+        <style>
+            .container-skills {
+                padding: 60px 10%;
+                text-align: center;
+            }
+
+            .skills-title {
+                display: inline-block;
+                border-bottom: 3px solid black;
+                margin-bottom: 40px;
+                font-size: 2.5rem;
+                font-weight: 700;
+            }
+
+            .skills-section {
+                margin-bottom: 50px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                font-weight: 600;
+                margin-bottom: 25px;
+            }
+
+            .skills-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 20px;
+                justify-items: center;
+            }
+
+            .skill-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skill-icon {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+                margin-bottom: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .skill-item:hover .skill-icon {
+                transform: scale(1.1);
+            }
+
+            .skill-name {
+                font-weight: 500;
+                font-size: 14px;
+            }
+        </style>
+        <div class="skills-wrapper">
+            <h1 class="skills-title">Skills</h1>
+            <div class="skills-section">
+                <h2 class="section-title">Front End</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/frontend/html.png" alt="HTML" class="skill-icon">
+                        <div class="skill-name">HTML = <strong>90%</strong></div>
+                    </div>
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/frontend/css.svg" alt="CSS" class="skill-icon">
+                        <div class="skill-name">CSS = <strong>70%</strong></div>
+                    </div>
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/frontend/js.png" alt="JavaScript" class="skill-icon">
+                        <div class="skill-name">JavaScript = <strong>20%</strong></div>
+                    </div>
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/frontend/bootstrap.svg" alt="Bootstrap" class="skill-icon">
+                        <div class="skill-name">Bootstrap = <strong>85%</strong></div>
+                    </div>
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/frontend/tailwindcss.png" alt="Tailwind" class="skill-icon">
+                        <div class="skill-name">Tailwind = <strong>20%</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <h2 class="section-title">Backend</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/backend/php.svg" alt="PHP" class="skill-icon">
+                        <div class="skill-name">PHP = <strong>50%</strong></div>
+                    </div>
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/backend/sql.png" alt="SQL" class="skill-icon">
+                        <div class="skill-name">SQL = <strong>30%</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-section">
+                <h2 class="section-title">Web Design</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <img src="./assets tugas 2/skills/design/figma.png" alt="Figma" class="skill-icon">
+                        <div class="skill-name">Figma = <strong>30%</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 
 </html>
