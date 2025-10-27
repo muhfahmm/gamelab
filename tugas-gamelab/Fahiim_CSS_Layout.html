@@ -1,13 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 0 20%;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .card-content {
+            border: 1px solid black;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .card-header img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .card-name {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-button button {
+            height: 35px;
+            width: 100px;
+        }
+
+        .card-button {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            align-items: center;
+        }
+        .card-name p {
+            font-family: georgia;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <div class="wrapper">
+            <h1 style="display: flex; justify-content: center; align-items: center; margin: 10px 0; font-family: arial;">Produk</h1>
             <div class="card-container">
                 <div class="card-content">
                     <div class="card-header">
@@ -20,7 +80,7 @@
                         </div>
                         <div class="card-button">
                             <button>Detail</button>
-                        <button>Beli</button>
+                            <button>Beli</button>
                         </div>
                     </div>
                 </div>
@@ -35,7 +95,7 @@
                         </div>
                         <div class="card-button">
                             <button>Detail</button>
-                        <button>Beli</button>
+                            <button>Beli</button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +110,7 @@
                         </div>
                         <div class="card-button">
                             <button>Detail</button>
-                        <button>Beli</button>
+                            <button>Beli</button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +125,67 @@
                         </div>
                         <div class="card-button">
                             <button>Detail</button>
-                        <button>Beli</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 5.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 1</p>
+                            <p>rp: 250.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 6.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 2</p>
+                            <p>rp: 250.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 7.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 3</p>
+                            <p>rp: 250.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 8.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 4</p>
+                            <p>rp: 250.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
                         </div>
                     </div>
                 </div>
@@ -73,4 +193,5 @@
         </div>
     </div>
 </body>
+
 </html>
