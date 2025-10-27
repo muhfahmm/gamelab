@@ -4,47 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produk</title>
+    <title>Document</title>
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
         }
 
         .container {
-            padding: 40px 10%;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 28px;
+            padding: 0 20%;
         }
 
         .card-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            gap: 20px;
         }
 
         .card-content {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
+            border: 1px solid green;
+            border-radius: 8px;
         }
-
         .card-content:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            transition: .3s;
         }
 
         .card-header {
@@ -52,189 +35,172 @@
             justify-content: center;
             align-items: center;
             height: 200px;
-            background-color: #fafafa;
         }
 
         .card-header img {
-            max-height: 90%;
-            max-width: 90%;
+            max-height: 100%;
+            max-width: 100%;
             object-fit: contain;
         }
 
-        .card-body {
-            padding: 15px;
-            text-align: center;
+        .card-name {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .card-name p:first-child {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .card-name p:last-child {
-            color: #27ae60;
-            font-weight: 500;
-            margin-top: 5px;
+        .card-button button {
+            height: 35px;
+            width: 100px;
+            border: none;
+            background: none;
+            border: 2px solid green;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         .card-button {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 15px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            align-items: center;
         }
 
-        .card-button button {
-            height: 35px;
-            width: 90px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-
-        .card-button button:first-child {
-            background-color: #fff;
-            border: 1.5px solid #27ae60;
-            color: #27ae60;
-        }
-
-        .card-button button:first-child:hover {
-            background-color: #27ae60;
-            color: #fff;
-        }
-
-        .card-button button:last-child {
-            background-color: #27ae60;
-            color: #fff;
-            border: 1.5px solid #27ae60;
-        }
-
-        .card-button button:last-child:hover {
-            background-color: #1e874b;
+        .card-name p {
+            font-family: georgia;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Produk</h1>
-        <div class="card-container">
-
-            <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 1.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 1</p>
-                        <p>Rp 1.699.000</p>
+        <div class="wrapper">
+            <h1 style="display: flex; justify-content: center; align-items: center; margin: 10px 0; font-family: arial;">Produk</h1>
+            <div class="card-container">
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 1.webp">
                     </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 1</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 2.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 2</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 3.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 3</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 4.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 4</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 5.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 1</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 6.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 2</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 7.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 3</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <img src="assets produk/produk 8.webp">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-name">
+                            <p>produk 4</p>
+                            <p>rp: 1.699.000</p>
+                        </div>
+                        <div class="card-button">
+                            <button>Detail</button>
+                            <button>Beli</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 2.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 2</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 3.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 3</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 4.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 4</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-                        <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 4.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 4</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-                        <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 4.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 4</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-                        <div class="card-content">
-                <div class="card-header">
-                    <img src="assets produk/produk 4.webp">
-                </div>
-                <div class="card-body">
-                    <div class="card-name">
-                        <p>Produk 4</p>
-                        <p>Rp 1.699.000</p>
-                    </div>
-                    <div class="card-button">
-                        <button>Detail</button>
-                        <button>Beli</button>
-                    </div>
-                </div>
-            </div>
-
-            
         </div>
     </div>
 </body>
