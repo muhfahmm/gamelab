@@ -18,11 +18,16 @@
         .card-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 20px;
         }
 
         .card-content {
-            border: 1px solid black;
+            border: 1px solid green;
+            border-radius: 8px;
+        }
+        .card-content:hover {
+            scale: 1.1;
+            transition: .6s;
         }
 
         .card-header {
@@ -48,6 +53,11 @@
         .card-button button {
             height: 35px;
             width: 100px;
+            border: none;
+            background: none;
+            border: 2px solid green;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         .card-button {
@@ -58,6 +68,7 @@
             margin-top: 10px;
             align-items: center;
         }
+
         .card-name p {
             font-family: georgia;
         }
