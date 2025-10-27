@@ -2,71 +2,74 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
-    <title>Cita-cita Saya</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            font-family: "Poppins", sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: pink;
-            color: #333;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 30px 0;
-            color: #d63384;
+            background-color: #1e293b;
+            color: white;
         }
 
         .container {
-            padding: 0 20%;
+            padding: 50px 8%;
         }
 
-        .biodata {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: white;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
         }
 
-        p {
-            font-size: 20px;
+        .card-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        #tujuan {
-            color: black;
-            font-weight: bold;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+        .card-content {
+            background-color: #1e293b;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            transition: transform 0.25s, box-shadow 0.25s;
         }
 
-        .link {
-            margin: 20px 0;
+        .card-image img {
+            width: 100%;
+            height: 390px;
+        }
+
+        .card-title {
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-button {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 12px;
+            gap: 10px;
         }
 
-        .link p {
-            margin-right: 5px;
-        }
-
-        .link a {
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .link a:hover {
-            color: red;
+        .card-button button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
             transition: 0.3s;
         }
     </style>
@@ -74,21 +77,113 @@
 
 <body>
     <div class="container">
-        <h1>Cita-cita Saya</h1>
-        <div class="biodata">
-            <p>
-                Halo, nama saya Fidela. Saya bercita-cita menjadi fotografer/videografer dan saya juga menyukai coding.
-            </p>
-        </div>
-        <div class="section" id="tujuan">
-            Tujuan saya adalah membuat kenangan momen indah dan berharga untuk semua orang, coding juga
-            kita bisa membuat website ataupun aplikasi yang di inginkan
-        </div>
-        <div class="link">
-            <p>Lihat profil instagram saya di sini:</p>
-            <a href="https://www.instagram.com/deazhy0b?igsh=MWpvZHF0aW1mZmRseA=" target="_blank">
-                @deazh0b
-            </a>
+        <h1 class="title">Daftar Film Terbaru</h1>
+        <div class="wrapper">
+            <div class="card-wrapper">
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/black panthers of ww2.jpg" alt="Black Panthers of WW2">
+                    </div>
+                    <div class="card-title">
+                        <h3>Black Panthers of WW2</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/captain america.jpeg" alt="Captain America">
+                    </div>
+                    <div class="card-title">
+                        <h3>Captain America</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/f1.jpg" alt="F1">
+                    </div>
+                    <div class="card-title">
+                        <h3>F1</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/jumbo.jpg" alt="Jumbo">
+                    </div>
+                    <div class="card-title">
+                        <h3>Jumbo</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/jurasic world.jpg" alt="Jurassic World">
+                    </div>
+                    <div class="card-title">
+                        <h3>Jurassic World</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/minecraft.jpeg" alt="Minecraft Movie">
+                    </div>
+                    <div class="card-title">
+                        <h3>Minecraft Movie</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/pamali.jpg" alt="Pamali">
+                    </div>
+                    <div class="card-title">
+                        <h3>Pamali</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="card-image">
+                        <img src="film assets/venom.jpg" alt="Venom">
+                    </div>
+                    <div class="card-title">
+                        <h3>Venom</h3>
+                    </div>
+                    <div class="card-button">
+                        <button>Tonton Sekarang</button>
+                        <button>Tambahkan ke Tonton Nanti</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
