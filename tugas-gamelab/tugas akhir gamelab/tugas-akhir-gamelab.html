@@ -19,28 +19,9 @@
             color: #212529;
         }
 
-        /* NAVBAR */
-        nav {
-            background-color: #212529;
-            color: white;
-            padding: 12px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
         .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
+            padding: 0 20%;
         }
-
-        .wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-
-
 
         /* FOOTER */
         footer {
@@ -53,80 +34,105 @@
 </head>
 
 <body>
-    <nav class="container">
-        <div class="wrapper">
-            <div class="logo">
-                <h1>GRADASI TOPUP</h1>
-            </div>
-            <div class="input-search">
-                <form action="">
-                    <input type="text" placeholder="cari game...">
-                </form>
-            </div>
-            <div class="nav-menu">
-                <i class="bi bi-cart3"></i>
-                <div class="divider"></div>
-                <div class="login-btn">
-                    <button>Masuk</button>
+    <nav class="nav-container">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1>GRADASI TOPUP</h1>
+                </div>
+                <div class="input-search">
+                    <form action="">
+                        <input type="text" placeholder="cari game...">
+                    </form>
+                </div>
+                <div class="nav-menu">
+                    <i class="bi bi-cart3"></i>
+                    <div class="divider"></div>
+                    <div class="login-btn">
+                        <button>Masuk</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <style>
-            .logo h1 {
-                font-size: 22px;
-                letter-spacing: 1px;
-            }
-
-            .input-search input {
-                padding: 8px 12px;
-                border-radius: 5px;
-                border: none;
-                outline: none;
-                width: 250px;
-                transition: 0.3s;
-            }
-
-            .input-search input:focus {
-                box-shadow: 0 0 5px #0d6efd;
-            }
-
-            .nav-menu {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .nav-menu i {
-                font-size: 22px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .nav-menu i:hover {
-                color: #0d6efd;
-            }
-
-            .divider {
-                width: 1px;
-                height: 25px;
-                background-color: rgba(255, 255, 255, 0.3);
-            }
-
-            .login-btn button {
-                background: #0d6efd;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                padding: 8px 16px;
-                cursor: pointer;
-                transition: 0.3s;
-            }
-
-            .login-btn button:hover {
-                background: #0b5ed7;
-            }
-        </style>
     </nav>
+
+    <style>
+        .nav-container {
+            background-color: #0d6efd;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            /* batas lebar konten */
+            margin: 0 auto;
+            /* membuat konten sejajar ke tengah */
+            padding: 0 20px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        .input-search input {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 250px;
+            transition: 0.3s;
+        }
+
+        .input-search input:focus {
+            box-shadow: 0 0 5px #0d6efd;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-menu i {
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .nav-menu i:hover {
+            color: #0d6efd;
+        }
+
+        .divider {
+            width: 1px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-btn button {
+            border: 2px solid white;
+            background: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+
 
     <section class="container">
         <div class="wrapper">
@@ -236,6 +242,7 @@
     </section>
 
     <section class="container">
+        <h1 style="margin: 20px 0;">Game Populer</h1>
         <div class="wrapper">
             <div class="card-container">
                 <div class="card">
@@ -251,104 +258,210 @@
 
                 <div class="card">
                     <div class="card-content-header">
-                        <img src="https://cdn.unipin.com/images/icon_product_pages/1758702385-icon-DR-281EBB%20DIGITAL%20SKIN%20EFOOTBALL.DI.APAC.APAC.VA.300%20w%20x%20300%20hPX.JAN25_R1_DIGITAL%20SKIN%20-%20Messi.jpg"
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
                             alt="">
                     </div>
                     <div class="card-content-footer">
-                        <h3>eFootball</h3>
+                        <h3>Mobile Legends</h3>
                         <button>Top Up</button>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-content-header">
-                        <img src="https://cdn.unipin.com/images/icon_product_pages/1758702385-icon-DR-281EBB%20DIGITAL%20SKIN%20EFOOTBALL.DI.APAC.APAC.VA.300%20w%20x%20300%20hPX.JAN25_R1_DIGITAL%20SKIN%20-%20Messi.jpg"
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1633599388-icon-Icon_1024.jpg"
                             alt="">
                     </div>
                     <div class="card-content-footer">
-                        <h3>eFootball</h3>
+                        <h3>Call of Duty</h3>
                         <button>Top Up</button>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-content-header">
-                        <img src="https://cdn.unipin.com/images/icon_product_pages/1758702385-icon-DR-281EBB%20DIGITAL%20SKIN%20EFOOTBALL.DI.APAC.APAC.VA.300%20w%20x%20300%20hPX.JAN25_R1_DIGITAL%20SKIN%20-%20Messi.jpg"
+                        <img src="https://imgop.itemku.com/?url=https%3A%2F%2Fd1x91p7vw3vuq8.cloudfront.net%2Fquickbuy%2F2024711%2Fjvyytzlsi9k3sueev0jjlt.png&w=148&q=75"
                             alt="">
                     </div>
                     <div class="card-content-footer">
-                        <h3>eFootball</h3>
+                        <h3>Free Fire</h3>
                         <button>Top Up</button>
                     </div>
                 </div>
+                <style>
+                    .card-container {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                        gap: 20px;
+                        width: 100%;
+                    }
+
+                    .card {
+                        background-color: #fff;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                        transition: all 0.3s ease;
+                        overflow: hidden;
+                        text-align: center;
+                        cursor: pointer;
+                    }
+
+                    .card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .card-content-header img {
+                        width: 100%;
+                        height: 250px;
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .card-content-footer {
+                        padding: 12px;
+                    }
+
+                    .card-content-footer h3 {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #333;
+                        margin-bottom: 10px;
+                    }
+
+                    .card-content-footer button {
+                        border: 2px solid #0b5ed7;
+                        font-weight: 600;
+                        background: none;
+                        padding: 8px 16px;
+                        border-radius: 5px;
+                        width: 100%;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    }
+                </style>
             </div>
         </div>
     </section>
 
-    <style>
-        .card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-content-header img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-bottom: 1px solid #eee;
-        }
-
-        .card-content-footer {
-            padding: 12px;
-        }
-
-        .card-content-footer h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .card-content-footer button {
-            background-color: #0d6efd;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .card-content-footer button:hover {
-            background-color: #0b5ed7;
-        }
-    </style>
-
-
-    <footer>
-        <div class="container">
-            <p>© 2025 Gradasi Topup. Semua hak dilindungi.</p>
+    <section class="container">
+        <div class="wrapper" style="margin: 20px 0;">
+            <h1 class="section-title">Lebih Banyak Game</h1>
+            <main class="all-products">
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+                <div class="product-wrapper">
+                    <div class="product-header">
+                        <img src="https://cdn.unipin.com/images/icon_product_pages/1760002027-icon-MLBB%20200%20x%20200_11zon.png"
+                            alt="">
+                    </div>
+                    <div class="product-footer">
+                        <div class="title">Mobile Legends</div>
+                    </div>
+                </div>
+            </main>
         </div>
-    </footer>
+        <style>
+            .container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                text-align: left;
+                color: #222;
+            }
+
+            .all-products {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .product-wrapper {
+                background-color: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .product-wrapper:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .product-header img {
+                width: 100%;
+                height: 180px;
+                object-fit: contain;
+                background-color: #f8f8f8;
+            }
+
+            .product-footer {
+                padding: 10px 0;
+            }
+
+            .product-footer .title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+            }
+        </style>
+    </section>
+
+
+
 </body>
 
 </html>
