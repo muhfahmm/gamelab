@@ -249,7 +249,58 @@
             </main>
         </div>
         <style>
-            
+            .container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                text-align: left;
+                color: #222;
+            }
+
+            .all-products {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+
+            .product-wrapper {
+                background-color: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .product-wrapper:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .product-header img {
+                width: 100%;
+                height: 180px;
+                object-fit: contain;
+                background-color: #f8f8f8;
+            }
+
+            .product-footer {
+                padding: 10px 0;
+            }
+
+            .product-footer .title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #333;
+            }
         </style>
     </section>
 
@@ -271,6 +322,69 @@
                 <a href="https://github.com/muhfahmm" target="_blank"><i class="bi bi-github"></i></a>
             </div>
         </div>
+
+        <style>
+            .footer-container {
+                background-color: #0d6efd;
+                color: #fff;
+                padding: 40px 0 20px;
+                font-family: Arial, sans-serif;
+            }
+
+            .footer-wrapper {
+                max-width: 1200px;
+                margin: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 30px;
+                padding: 0 20px;
+            }
+
+            .footer-logo h2 {
+                margin-bottom: 10px;
+                color: #ffffff;
+            }
+
+            .footer-logo p {
+                color: #ccc;
+                font-size: 14px;
+            }
+
+            .footer-menu ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .footer-menu ul li {
+                margin: 8px 0;
+            }
+
+            .footer-menu ul li a {
+                text-decoration: none;
+                color: #ccc;
+                font-size: 14px;
+                transition: 0.3s;
+            }
+
+            .footer-social-media i {
+                font-size: 30px;
+            }
+
+            .footer-social-media a {
+                color: white;
+                font-size: 20px;
+                margin-right: 10px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 13px;
+                color: #777;
+            }
+        </style>
     </footer>
 
 </body>
