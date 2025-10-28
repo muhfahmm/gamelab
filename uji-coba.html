@@ -2,189 +2,266 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mengenal Positioning CSS</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #1e293b;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #007bff;
             color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
 
-        .container {
-            padding: 50px 8%;
+        .navbar h1 {
+            margin: 0;
+            font-size: 20px;
         }
 
-        .title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 28px;
-            color: white;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-wrapper {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
             gap: 20px;
         }
 
-        .card-content {
-            background-color: #1e293b;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            transition: transform 0.25s, box-shadow 0.25s;
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .card-image img {
-            width: 100%;
-            height: 390px;
+        .navbar ul li a:hover {
+            text-decoration: underline;
         }
 
-        .card-title {
+        .content {
+            margin-top: 100px;
+            padding: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            /* Light Gray Background */
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #007bff;
+            /* Primary Blue */
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 10px;
-            font-size: 18px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        section {
+            padding: 40px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 3px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin: 0 auto 30px;
+            display: block;
+            width: fit-content;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 25px auto;
+            padding: 15px;
+            background-color: #28a745;
+            /* Green CTA */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #1e7e34;
+        }
+
+        /* Styling Khusus Kontak */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: 600;
         }
 
-        .card-button {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            padding: 12px;
-            gap: 10px;
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        .card-button button {
-            flex: 1;
-            padding: 10px;
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            border-radius: 5px;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            padding: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #343a40;
+            color: white;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="title">Daftar Film Terbaru</h1>
-        <div class="wrapper">
-            <div class="card-wrapper">
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/black panthers of ww2.jpg" alt="Black Panthers of WW2">
-                    </div>
-                    <div class="card-title">
-                        <h3>Black Panthers of WW2</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
+    </section>
+    <header>
+        <nav>
+            <div class="navbar">
+                <a href="#beranda">namamu</a>
+                <a href="#tentang">Tentang Saya</a>
+                <a href="#kontak">Kontak Saya</a>
+                <a href="#sosial-media">Sosial Media</a>
+            </div>
+        </nav>
+    </header>
+            <div class="content-wrapper">
+                <div class="img-aku">
+                    <img src="./assets css positioning/aku.jpg">
                 </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/captain america.jpeg" alt="Captain America">
-                    </div>
-                    <div class="card-title">
-                        <h3>Captain America</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/f1.jpg" alt="F1">
-                    </div>
-                    <div class="card-title">
-                        <h3>F1</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/jumbo.jpg" alt="Jumbo">
-                    </div>
-                    <div class="card-title">
-                        <h3>Jumbo</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/jurasic world.jpg" alt="Jurassic World">
-                    </div>
-                    <div class="card-title">
-                        <h3>Jurassic World</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/minecraft.jpeg" alt="Minecraft Movie">
-                    </div>
-                    <div class="card-title">
-                        <h3>Minecraft Movie</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/pamali.jpg" alt="Pamali">
-                    </div>
-                    <div class="card-title">
-                        <h3>Pamali</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="card-image">
-                        <img src="film assets/venom.jpg" alt="Venom">
-                    </div>
-                    <div class="card-title">
-                        <h3>Venom</h3>
-                    </div>
-                    <div class="card-button">
-                        <button>Tonton Sekarang</button>
-                        <button>Tambahkan ke Tonton Nanti</button>
+                <div class="description">
+                    <p class="first">Hi, I'm Muhammad Fahiim Musthofa</p>
+                    <h1 class="second">I'm a <span style="color: blueviolet;">Fullstack Developer</span></h1>
+                    <p class="third">Halo! Saya adalah seorang junior fullstack developer yang fokus di
+                        pengembangan web menggunakan teknologi seperti
+                        <strong>PHP Native</strong>, <strong>Vanilla JavaScript</strong>, serta desain antarmuka
+                        menggunakan <strong>Bootstrap</strong> dan <strong>Tailwind CSS</strong> Selain itu saya juga
+                        belajar web desain menggunakan <strong>Figma</strong>.
+                    </p>
+                    <div class="social-media">
+                        <a href="https://github.com/muhfahmm" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-github"></i>
+                            </div>
+                            <div class="medsos-name">Github</div>
+                        </a>
+                        <a href="https://www.instagram.com/_muhfhmm/" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-instagram"></i>
+                            </div>
+                            <div class="medsos-name">Instagram</div>
+                        </a>
+                        <a href="https://www.threads.com/@_muhfhmm" target="_blank">
+                            <div class="medsos-icon">
+                                <i class="bi bi-threads"></i>
+                            </div>
+                            <div class="medsos-name">Threads</div>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+
+
     </div>
 </body>
 
