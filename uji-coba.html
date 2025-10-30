@@ -4,582 +4,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mengenal Positioning CSS</title>
+    <title>Produk Baju Kemeja</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #007bff;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-
-        .navbar h1 {
+            background-color: #f9f9f9;
             margin: 0;
-            font-size: 20px;
-        }
-
-        .navbar ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .navbar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            margin-top: 100px;
             padding: 20px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            /* Light Gray Background */
-            color: #343a40;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #007bff;
-            /* Primary Blue */
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-            display: inline-block;
         }
 
         .container {
-            width: 90%;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        section {
-            padding: 40px;
-            margin-bottom: 30px;
-            background: white;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
         }
 
-        h1,
-        h2,
-        h3 {
-            color: #007bff;
-            text-align: center;
+        h2 {
+            color: #d63384;
             margin-bottom: 20px;
+            border-bottom: 2px solid #f1c6dc;
+            padding-bottom: 10px;
         }
 
-        h1 {
-            font-size: 2.5em;
+        .produk-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        h2 {
-            font-size: 2em;
-            border-bottom: 3px solid #007bff;
-            display: inline-block;
-            padding-bottom: 5px;
-            margin: 0 auto 30px;
-            display: block;
-            width: fit-content;
-        }
-
-        .tagline {
-            text-align: center;
-            color: #6c757d;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-        }
-
-        .cta-button {
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 25px auto;
+        .produk {
+            border: 1px solid #ddd;
+            border-radius: 10px;
             padding: 15px;
-            background-color: #28a745;
-            /* Green CTA */
-            color: white;
+            width: 250px;
             text-align: center;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            background-color: #fff;
+            transition: 0.3s;
         }
 
-        .cta-button:hover {
-            background-color: #1e7e34;
+        .produk:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
         }
 
-        /* Styling Khusus Kontak */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .produk img {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .submit-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .contact-info p {
-            margin: 10px 0;
-            padding: 5px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #343a40;
-            color: white;
-            margin-top: 20px;
-        }
-
-        h2 {
-            color: #333;
+            height: 200px;
+            object-fit: contain;
             margin-bottom: 10px;
         }
 
-        p {
-            text-align: justify;
-            margin-bottom: 20px;
+        .produk h3 {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #5a1b6f;
+        }
+
+        .produk p {
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .tombol {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tombol button {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .detail {
+            background-color: #c77dff;
+            color: white;
+        }
+
+        .beli {
+            background-color: #ffc8dd;
+            color: #333;
+        }
+
+        .detail:hover {
+            background-color: #a855f7;
+        }
+
+        .beli:hover {
+            background-color: #ffafcc;
         }
     </style>
 </head>
 
 <body>
-    </section>
-    <header>
-        <nav>
-            <div class="navbar">
-                <a href="#beranda">namamu</a>
-                <a href="#tentang">Tentang Saya</a>
-                <a href="#kontak">Kontak Saya</a>
-                <a href="#sosial-media">Sosial Media</a>
-            </div>
-        </nav>
-    </header>
+
     <div class="container">
-        <section id="beranda">
-            <hr style="border: 0; border-top: 1px solid #e9ecef; margin: 30px 0;">
-
-            <div style="text-align: center;">
-                <h2>Apa Itu Positioning?</h2>
-                <p style="max-width: 700px; margin: 0 auto 30px;">Positioning adalah tindakan merancang citra dan
-                    penawaran perusahaan agar menempati tempat yang khas dan berharga di benak target pasar. Ini bukan
-                    tentang apa yang Anda lakukan terhadap produk, tetapi tentang apa yang Anda lakukan terhadap
-                    pikiran calon pelanggan.</p>
+        <h2>Produk Baju Kemeja</h2>
+        <div class="produk-list">
+            <div class="produk">
+                <img src="https://www.newbalance.co.id/media/catalog/product/cache/e8af46e41ac3b8200634ac4f1bc5de76/0/1/01-NEW-BALANCE-FFSSBNEWA-NEWMR530AD-White.jpg"
+                    alt="Kemeja Polos">
+                <h3>Kemeja Polos</h3>
+                <p>Rp 150.000,-</p>
+                <div class="tombol">
+                    <button class="detail">Detail</button>
+                    <button class="beli">Beli</button>
+                </div>
             </div>
 
-            <div
-                style="margin: 40px auto; padding: 20px; background-color: #f1f1f1; border-radius: 8px;">
-                <h3 style="color: #007bff; text-align: left;">Mengapa Positioning Penting?</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 10px;"><strong>Diferensiasi:</strong> Membedakan Anda secara jelas dari
-                        pesaing yang sejenis.</li>
-                    <li style="margin-bottom: 10px;"><strong>Relevansi:</strong> Memastikan pesan Anda beresonansi
-                        dengan kebutuhan dan keinginan konsumen.</li>
-                    <li style="margin-bottom: 10px;"><strong>Fokus:</strong> Memandu semua keputusan pemasaran,
-                        komunikasi, dan pengembangan produk.</li>
-                    <li style="margin-bottom: 10px;"><strong>Nilai:</strong> Membangun ekuitas merek yang kuat dan
-                        memungkinkan penetapan harga premium.</li>
-                </ul>
+            <div class="produk">
+                <img src="https://www.newbalance.co.id/media/catalog/product/cache/e8af46e41ac3b8200634ac4f1bc5de76/0/1/01-NEW-BALANCE-FFSSBNEWA-NEWMR530AD-White.jpg"
+                    alt="Kemeja Polos Hitam">
+                <h3>Kemeja Polos Hitam</h3>
+                <p>Rp 230.000,-</p>
+                <div class="tombol">
+                    <button class="detail">Detail</button>
+                    <button class="beli">Beli</button>
+                </div>
             </div>
-        </section>
 
-        <section id="tentang">
-            <h1 style="color: #007bff;">Filosofi Kami: Membentuk Persepsi dan Menguasai Pasar</h1>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Kami percaya bahwa di pasar yang ramai
-                dan bising, positioning adalah mata uang yang paling berharga. Halaman ini didedikasikan untuk
-                menjelajahi lebih dalam prinsip-prinsip positioning yang efektif.</p>
-            <div style="max-width: 800px; margin: auto;">
-                <h2>Prinsip Inti dan Definisi Positioning</h2>
-                <p>Positioning yang kuat bermuara pada menjawab tiga pertanyaan mendasar: <b>Siapa</b> target audiens
-                    Anda? <b>Apa</b> perbedaan Anda dari pesaing? <b>Mengapa</b> konsumen harus memilih Anda? Kami
-                    memandu Anda melalui proses sistematis ini.</p>
-                <h2 style="margin-top: 40px;">Layanan Kami dalam Positioning</h2>
-                <p>Kami menawarkan serangkaian layanan untuk memastikan merek Anda memiliki posisi yang tak terkalahkan:
-                </p>
-                <ul style="list-style: square; padding-left: 20px;">
-                    <li style="margin-bottom: 10px;">Analisis Mendalam:Mengidentifikasi celah pasar dan posisi pesaing.
-                    </li>
-                    <li style="margin-bottom: 10px;">Pengembangan Pernyataan:Merumuskan pernyataan positioning yang
-                        jelas dan meyakinkan.</li>
-                    <li style="margin-bottom: 10px;">Strategi Aktivasi:Memastikan komunikasi pemasaran memperkuat posisi
-                        yang telah ditetapkan.</li>
-                </ul>
+            <div class="produk">
+                <img src="https://www.newbalance.co.id/media/catalog/product/cache/e8af46e41ac3b8200634ac4f1bc5de76/0/1/01-NEW-BALANCE-FFSSBNEWA-NEWMR530AD-White.jpg"
+                    alt="Kemeja Polos Stylish">
+                <h3>Kemeja Polos Stylish</h3>
+                <p>Rp 250.000,-</p>
+                <div class="tombol">
+                    <button class="detail">Detail</button>
+                    <button class="beli">Beli</button>
+                </div>
             </div>
-        </section>
-
-        <section id="sosial-media">
-            <div style="flex: 1; min-width: 300px;" class="contact-info">
-                <h2 style="text-align: left;">Sosial Media</h2>
-                <p><strong>Instagram:</strong> ??</p>
-                <p><strong>Tiktok:</strong> ??</p>
-            </div>
-        </section>
+        </div>
     </div>
 
-
-    </div>
-</body>
-
-</html><!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mengenal Positioning CSS</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #007bff;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-        }
-
-        .navbar h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .navbar ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .navbar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            margin-top: 100px;
-            padding: 20px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            /* Light Gray Background */
-            color: #343a40;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #007bff;
-            /* Primary Blue */
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 5px 10px;
-            transition: background-color 0.3s;
-            display: inline-block;
-        }
-
-        .container {
-            width: 90%;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        section {
-            padding: 40px;
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #007bff;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-        }
-
-        h2 {
-            font-size: 2em;
-            border-bottom: 3px solid #007bff;
-            display: inline-block;
-            padding-bottom: 5px;
-            margin: 0 auto 30px;
-            display: block;
-            width: fit-content;
-        }
-
-        .tagline {
-            text-align: center;
-            color: #6c757d;
-            font-size: 1.2em;
-            margin-bottom: 40px;
-        }
-
-        .cta-button {
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 25px auto;
-            padding: 15px;
-            background-color: #28a745;
-            /* Green CTA */
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #1e7e34;
-        }
-
-        /* Styling Khusus Kontak */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .submit-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-
-        .contact-info p {
-            margin: 10px 0;
-            padding: 5px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background-color: #343a40;
-            color: white;
-            margin-top: 20px;
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        p {
-            text-align: justify;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    </section>
-    <header>
-        <nav>
-            <div class="navbar">
-                <a href="#beranda">namamu</a>
-                <a href="#tentang">Tentang Saya</a>
-                <a href="#kontak">Kontak Saya</a>
-                <a href="#sosial-media">Sosial Media</a>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <section id="beranda">
-            <hr style="border: 0; border-top: 1px solid #e9ecef; margin: 30px 0;">
-
-            <div style="text-align: center;">
-                <h2>Apa Itu Positioning?</h2>
-                <p style="max-width: 700px; margin: 0 auto 30px;">Positioning adalah tindakan merancang citra dan
-                    penawaran perusahaan agar menempati tempat yang khas dan berharga di benak target pasar. Ini bukan
-                    tentang apa yang Anda lakukan terhadap produk, tetapi tentang apa yang Anda lakukan terhadap
-                    pikiran calon pelanggan.</p>
-            </div>
-
-            <div
-                style="margin: 40px auto; padding: 20px; background-color: #f1f1f1; border-radius: 8px;">
-                <h3 style="color: #007bff; text-align: left;">Mengapa Positioning Penting?</h3>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 10px;"><strong>Diferensiasi:</strong> Membedakan Anda secara jelas dari
-                        pesaing yang sejenis.</li>
-                    <li style="margin-bottom: 10px;"><strong>Relevansi:</strong> Memastikan pesan Anda beresonansi
-                        dengan kebutuhan dan keinginan konsumen.</li>
-                    <li style="margin-bottom: 10px;"><strong>Fokus:</strong> Memandu semua keputusan pemasaran,
-                        komunikasi, dan pengembangan produk.</li>
-                    <li style="margin-bottom: 10px;"><strong>Nilai:</strong> Membangun ekuitas merek yang kuat dan
-                        memungkinkan penetapan harga premium.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="tentang">
-            <h1 style="color: #007bff;">Filosofi Kami: Membentuk Persepsi dan Menguasai Pasar</h1>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 30px;">Kami percaya bahwa di pasar yang ramai
-                dan bising, positioning adalah mata uang yang paling berharga. Halaman ini didedikasikan untuk
-                menjelajahi lebih dalam prinsip-prinsip positioning yang efektif.</p>
-            <div style="max-width: 800px; margin: auto;">
-                <h2>Prinsip Inti dan Definisi Positioning</h2>
-                <p>Positioning yang kuat bermuara pada menjawab tiga pertanyaan mendasar: <b>Siapa</b> target audiens
-                    Anda? <b>Apa</b> perbedaan Anda dari pesaing? <b>Mengapa</b> konsumen harus memilih Anda? Kami
-                    memandu Anda melalui proses sistematis ini.</p>
-                <h2 style="margin-top: 40px;">Layanan Kami dalam Positioning</h2>
-                <p>Kami menawarkan serangkaian layanan untuk memastikan merek Anda memiliki posisi yang tak terkalahkan:
-                </p>
-                <ul style="list-style: square; padding-left: 20px;">
-                    <li style="margin-bottom: 10px;">Analisis Mendalam:Mengidentifikasi celah pasar dan posisi pesaing.
-                    </li>
-                    <li style="margin-bottom: 10px;">Pengembangan Pernyataan:Merumuskan pernyataan positioning yang
-                        jelas dan meyakinkan.</li>
-                    <li style="margin-bottom: 10px;">Strategi Aktivasi:Memastikan komunikasi pemasaran memperkuat posisi
-                        yang telah ditetapkan.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="sosial-media">
-            <div style="flex: 1; min-width: 300px;" class="contact-info">
-                <h2 style="text-align: left;">Sosial Media</h2>
-                <p><strong>Instagram:</strong> ??</p>
-                <p><strong>Tiktok:</strong> ??</p>
-            </div>
-        </section>
-    </div>
-
-
-    </div>
 </body>
 
 </html>
