@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            padding-top: 60px; /* Menambahkan padding-top untuk mengakomodasi navbar fixed */
             background-color: #f4f4f4;
             color: #333;
         }
@@ -21,9 +22,14 @@
         nav {
             background-color: #333;
             overflow: hidden;
+            display: flex; /* Mengubah nav menjadi flexbox untuk menengahkan */
+            justify-content: center; /* Menengahkan konten nav */
+            position: fixed; /* Membuat navbar fixed di atas */
+            top: 0; /* Posisi tetap di atas */
+            width: 100%; /* Lebar penuh */
+            z-index: 1000; /* Memastikan navbar di atas elemen lain */
         }
         nav a {
-            float: left;
             display: block;
             color: white;
             text-align: center;
@@ -35,8 +41,9 @@
             color: black;
         }
         .hero {
-            background-image: url('https://via.placeholder.com/1200x400?text=Matcha+Latte+Banner');
+            background-image: url('https://png.pngtree.com/png-clipart/20231019/original/pngtree-green-matcha-drink-png-image_13371375.png'); /* Mengganti background dengan gambar minuman matcha */
             background-size: cover;
+            background-position: center;
             height: 400px;
             display: flex;
             align-items: center;
@@ -46,12 +53,18 @@
         }
         .hero h1 {
             font-size: 3em;
+            color: green; /* Mengubah warna tulisan menjadi hijau */
         }
         .products {
             padding: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+        }
+        .products h1 { /* Judul "Daftar Menu" dibuat lebih besar sedikit */
+            text-align: center; /* Menengahkan judul "Daftar Menu" */
+            width: 100%; /* Memastikan judul mengambil lebar penuh untuk penengahan */
+            font-size: 3em; /* Membuat ukuran font lebih besar sedikit dari sebelumnya */
         }
         .product {
             background-color: white;
@@ -85,14 +98,47 @@
         .product button:hover {
             background-color: #45a049;
         }
-        footer {
-            background-color: #333;
-            color: white;
+        .contact {
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
-            padding: 10px;
-            position: fixed;
+        }
+        .contact h2 {
+            margin-bottom: 20px;
+        }
+        .contact p {
+            margin: 10px 0;
+        }
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .contact input, .contact textarea {
             width: 100%;
-            bottom: 0;
+            max-width: 400px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .contact button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .contact button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -110,27 +156,74 @@
         <h1>Nikmati Matcha Latte Segar!</h1>
     </section>
     <section id="products" class="products">
+        <h1>Daftar Menu</h1> <!-- Judul dibuat lebih besar -->
         <div class="product">
-            <img src="https://via.placeholder.com/300x200?text=Matcha+Latte+Classic" alt="Matcha Latte Classic">
+            <img src="https://png.pngtree.com/png-clipart/20231019/original/pngtree-green-matcha-drink-png-image_13371375.png" alt="Matcha Latte Classic">
             <h3>Matcha Latte Classic</h3>
             <p>Matcha latte tradisional dengan rasa autentik. Harga: Rp 25.000</p>
             <button>Beli Sekarang</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/300x200?text=Matcha+Latte+Vanilla" alt="Matcha Latte Vanilla">
+            <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-green-matcha-drink-png-image_10275399.png" alt="Matcha Latte Vanilla">
             <h3>Matcha Latte Vanilla</h3>
             <p>Matcha latte dengan sentuhan vanilla yang lembut. Harga: Rp 30.000</p>
             <button>Beli Sekarang</button>
         </div>
         <div class="product">
             <img src="https://deliyuan.duyuengroup.com/wp-content/uploads/2025/08/matcha-latte.jpg" alt="Matcha Latte Chocolate">
-            <h3>Matcha Latte Chocolate</h3>
-            <p>Matcha latte dengan cokelat untuk rasa manis. Harga: Rp 32.000</p>
+            <h3>Matcha Latte </h3>
+            <p>Matcha latte dengan bubuk matcha yang premium. Harga: Rp 32.000</p>
             <button>Beli Sekarang</button>
         </div>
     </section>
-    <footer>
-        <p>&copy; 2023 Matcha Latte Shop. Hubungi kami di info@matchalatteshop.com</p>
+    <section id="contact" class="contact">
+        <h2>Kontak Kami</h2>
+        <p>Hubungi kami untuk pertanyaan, pesanan khusus, atau informasi lebih lanjut tentang produk kami.</p>
+        <p><strong>Email:</strong> info@matchalatteshop.com</p>
+        <p><strong>Telepon:</strong> 085643416353</p>
+        <form action="#" method="post"> <!-- Form action bisa disesuaikan dengan backend -->
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            
+            <button type="submit">Kirim Pesan</button>
+        </form>
+    </section>
+    <footer class="footer-container">
+        <style>
+            .footer-container {
+                background-color: #4CAF50;
+                padding: 0 20%;
+            }
+            .footer-wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+            .list-footer-menu {
+                list-style: none;
+            }
+            .list-footer-menu a {
+                text-decoration: none;
+                font-size: 15px;
+                color: white;
+                font-weight: 400;
+            }
+        </style>
+        <div class="footer-wrapper">
+            <h1 style="color: white;">Footer</h1>
+            <div class="footer-menu">
+                <ul class="list-footer-menu">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">About Us</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
