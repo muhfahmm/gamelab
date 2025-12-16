@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GradasiNetwork - Penyedia Layanan Internet Terpercaya</title>
+    <title>GradasiNetwork - ISP Terpercaya</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -16,124 +14,63 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+            font-family: Arial, sans-serif;
+            padding-top: 56px; /* Untuk navbar fixed */
         }
         
         .navbar {
             background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
         .navbar-brand {
-            font-weight: 700;
+            font-weight: bold;
             color: white !important;
-            font-size: 1.8rem;
         }
         
         .navbar-brand span {
             color: var(--accent-color);
         }
         
-        .nav-link {
-            color: rgba(255,255,255,0.9) !important;
-            font-weight: 500;
-            margin: 0 5px;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: var(--accent-color) !important;
-        }
-        
         .hero-section {
-            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
-            background-size: cover;
-            background-position: center;
+            background-color: var(--primary-color);
             color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
-        
-        .hero-section h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .hero-section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
+            padding: 60px 0;
         }
         
         .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 70px;
-            height: 4px;
-            background-color: var(--accent-color);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            color: var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent-color);
         }
         
         .service-card {
-            text-align: center;
-            padding: 30px 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
             height: 100%;
         }
         
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
-        }
-        
         .service-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--secondary-color);
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            color: var(--primary-color);
             margin-bottom: 15px;
         }
         
         .package-card {
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        
-        .package-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .package-header {
             background-color: var(--primary-color);
             color: white;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-        }
-        
-        .package-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
         }
         
         .package-price {
@@ -141,12 +78,12 @@
             color: white;
             padding: 15px;
             text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
         
         .package-features {
-            padding: 25px;
+            padding: 20px;
             background-color: white;
         }
         
@@ -164,33 +101,41 @@
             border-bottom: none;
         }
         
-        .package-features li i {
-            color: var(--accent-color);
-            margin-right: 10px;
-        }
-        
         .contact-section {
             background-color: #f8f9fa;
-            padding: 80px 0;
+            padding: 40px 0;
         }
         
-        .contact-form {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0 20px;
         }
         
-        .btn-primary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-            padding: 12px 30px;
-            font-weight: 600;
+        .footer-logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
         }
         
-        .btn-primary:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        
+        .social-icons a {
+            color: white;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
         }
         
         .btn-custom {
@@ -204,101 +149,22 @@
             border-color: #16a085;
             color: white;
         }
-        
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 0 20px;
-        }
-        
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-logo span {
-            color: var(--accent-color);
-        }
-        
-        .footer-links h5 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-        
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-        
-        .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            margin-right: 10px;
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        .social-icons a:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-section {
-                padding: 70px 0;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#home">
                 <span>Gradasi</span>Network
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Beranda</a>
+                        <a class="nav-link" href="#home">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#layanan">Layanan</a>
@@ -317,9 +183,18 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
-            <h1>Koneksi Internet Cepat & Stabil</h1>
-            <p>GradasiNetwork menyediakan layanan internet berkualitas untuk rumah dan bisnis dengan kecepatan tinggi dan harga terjangkau. Terhubung lebih cepat, jelajahi dunia tanpa batas.</p>
-            <a href="#paket" class="btn btn-primary btn-lg">Lihat Paket Layanan</a>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1>Internet Cepat & Stabil</h1>
+                    <p class="lead">GradasiNetwork menyediakan layanan internet berkualitas untuk rumah dan bisnis dengan kecepatan tinggi dan harga terjangkau.</p>
+                    <a href="#paket" class="btn btn-success btn-lg">Lihat Paket Layanan</a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div style="font-size: 5rem; color: var(--accent-color);">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -327,32 +202,32 @@
     <section id="layanan" class="py-5">
         <div class="container">
             <h2 class="section-title">Layanan Kami</h2>
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col-md-4">
                     <div class="service-card">
-                        <div class="service-icon">
+                        <div class="service-icon text-center">
                             <i class="fas fa-home"></i>
                         </div>
-                        <h3>Internet Rumah</h3>
-                        <p>Koneksi internet super cepat untuk kebutuhan rumah tangga, streaming, gaming, dan kerja dari rumah dengan stabilitas terjamin 24/7.</p>
+                        <h3 class="text-center">Internet Rumah</h3>
+                        <p class="text-center">Koneksi internet untuk kebutuhan rumah tangga dengan stabilitas terjamin 24/7.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="service-card">
-                        <div class="service-icon">
+                        <div class="service-icon text-center">
                             <i class="fas fa-building"></i>
                         </div>
-                        <h3>Internet Bisnis</h3>
-                        <p>Solusi konektivitas untuk bisnis dengan dedicated bandwidth, uptime garansi 99.9%, dan dukungan teknis prioritas untuk kelancaran operasional.</p>
+                        <h3 class="text-center">Internet Bisnis</h3>
+                        <p class="text-center">Solusi konektivitas untuk bisnis dengan dedicated bandwidth dan uptime tinggi.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="service-card">
-                        <div class="service-icon">
+                        <div class="service-icon text-center">
                             <i class="fas fa-wifi"></i>
                         </div>
-                        <h3>Hotspot & Wireless</h3>
-                        <p>Layanan hotspot untuk area publik dan solusi wireless point-to-point untuk daerah yang sulit dijangkau kabel fiber optik.</p>
+                        <h3 class="text-center">Hotspot</h3>
+                        <p class="text-center">Layanan hotspot untuk area publik dan solusi wireless untuk daerah terpencil.</p>
                     </div>
                 </div>
             </div>
@@ -363,27 +238,26 @@
     <section id="paket" class="py-5 bg-light">
         <div class="container">
             <h2 class="section-title">Paket Layanan</h2>
-            <p class="text-center mb-5">Pilih paket yang sesuai dengan kebutuhan Anda. Semua paket sudah termasuk gratis pemasangan dan router WiFi.</p>
+            <p class="text-center mb-4">Pilih paket yang sesuai dengan kebutuhan Anda</p>
             
             <div class="row">
                 <div class="col-md-4">
                     <div class="package-card">
                         <div class="package-header">
                             <h3>Basic</h3>
-                            <p>Cocok untuk penggunaan personal</p>
                         </div>
                         <div class="package-price">
                             Rp 299.000<span>/bulan</span>
                         </div>
                         <div class="package-features">
                             <ul>
-                                <li><i class="fas fa-check"></i> Kecepatan 30 Mbps</li>
-                                <li><i class="fas fa-check"></i> Unlimited Quota</li>
-                                <li><i class="fas fa-check"></i> 1 Perangkat WiFi</li>
-                                <li><i class="fas fa-check"></i> Support 24/7</li>
-                                <li><i class="fas fa-check"></i> Gratis Pemasangan</li>
+                                <li>Kecepatan 30 Mbps</li>
+                                <li>Unlimited Quota</li>
+                                <li>1 Perangkat WiFi</li>
+                                <li>Support 24/7</li>
+                                <li>Gratis Pemasangan</li>
                             </ul>
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-3">
                                 <a href="#kontak" class="btn btn-custom">Pilih Paket</a>
                             </div>
                         </div>
@@ -394,21 +268,20 @@
                     <div class="package-card">
                         <div class="package-header">
                             <h3>Family</h3>
-                            <p>Rekomendasi untuk keluarga</p>
                         </div>
                         <div class="package-price">
                             Rp 499.000<span>/bulan</span>
                         </div>
                         <div class="package-features">
                             <ul>
-                                <li><i class="fas fa-check"></i> Kecepatan 100 Mbps</li>
-                                <li><i class="fas fa-check"></i> Unlimited Quota</li>
-                                <li><i class="fas fa-check"></i> 4 Perangkat WiFi</li>
-                                <li><i class="fas fa-check"></i> Parental Control</li>
-                                <li><i class="fas fa-check"></i> IPTV Included</li>
-                                <li><i class="fas fa-check"></i> Gratis Pemasangan</li>
+                                <li>Kecepatan 100 Mbps</li>
+                                <li>Unlimited Quota</li>
+                                <li>4 Perangkat WiFi</li>
+                                <li>Parental Control</li>
+                                <li>IPTV Included</li>
+                                <li>Gratis Pemasangan</li>
                             </ul>
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-3">
                                 <a href="#kontak" class="btn btn-custom">Pilih Paket</a>
                             </div>
                         </div>
@@ -419,21 +292,20 @@
                     <div class="package-card">
                         <div class="package-header">
                             <h3>Business</h3>
-                            <p>Solusi untuk kebutuhan bisnis</p>
                         </div>
                         <div class="package-price">
                             Rp 899.000<span>/bulan</span>
                         </div>
                         <div class="package-features">
                             <ul>
-                                <li><i class="fas fa-check"></i> Kecepatan 300 Mbps</li>
-                                <li><i class="fas fa-check"></i> Unlimited Quota</li>
-                                <li><i class="fas fa-check"></i> 10+ Perangkat WiFi</li>
-                                <li><i class="fas fa-check"></i> Static IP Address</li>
-                                <li><i class="fas fa-check"></i> Garansi Uptime 99.9%</li>
-                                <li><i class="fas fa-check"></i> Priority Support 24/7</li>
+                                <li>Kecepatan 300 Mbps</li>
+                                <li>Unlimited Quota</li>
+                                <li>10+ Perangkat WiFi</li>
+                                <li>Static IP Address</li>
+                                <li>Garansi Uptime 99.9%</li>
+                                <li>Priority Support 24/7</li>
                             </ul>
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-3">
                                 <a href="#kontak" class="btn btn-custom">Pilih Paket</a>
                             </div>
                         </div>
@@ -447,48 +319,75 @@
     <section id="kontak" class="contact-section">
         <div class="container">
             <h2 class="section-title">Hubungi Kami</h2>
-            <p class="text-center mb-5">Butuh bantuan memilih paket atau memiliki pertanyaan? Tim kami siap membantu Anda.</p>
+            <p class="text-center mb-4">Butuh bantuan memilih paket? Hubungi kami</p>
             
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="contact-form">
-                        <form id="contactForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label">Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="name" required>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Nomor Telepon</label>
+                                    <input type="tel" class="form-control" id="phone" required>
                                 </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Nomor Telepon</label>
-                                <input type="tel" class="form-control" id="phone" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="subject" class="form-label">Subjek</label>
-                                <select class="form-select" id="subject" required>
-                                    <option value="" selected disabled>Pilih subjek...</option>
-                                    <option value="paket">Informasi Paket Layanan</option>
-                                    <option value="pemasangan">Pemasangan Baru</option>
-                                    <option value="keluhan">Keluhan Layanan</option>
-                                    <option value="lainnya">Lainnya</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Pesan</label>
-                                <textarea class="form-control" id="message" rows="5" required></textarea>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="agree" required>
-                                <label class="form-check-label" for="agree">Saya setuju dengan syarat dan ketentuan</label>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary btn-lg">Kirim Pesan</button>
-                            </div>
-                        </form>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subjek</label>
+                                    <select class="form-select" id="subject" required>
+                                        <option value="" selected disabled>Pilih subjek...</option>
+                                        <option value="paket">Informasi Paket Layanan</option>
+                                        <option value="pemasangan">Pemasangan Baru</option>
+                                        <option value="keluhan">Keluhan Layanan</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Pesan</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agree" required>
+                                    <label class="form-check-label" for="agree">Saya setuju dengan syarat dan ketentuan</label>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Kirim Pesan</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Info Kontak -->
+            <div class="row mt-5">
+                <div class="col-md-4 text-center mb-3">
+                    <div class="p-3 border rounded">
+                        <i class="fas fa-map-marker-alt fa-2x mb-2" style="color: var(--accent-color);"></i>
+                        <h5>Alamat</h5>
+                        <p>Jl. Teknologi No. 123, Jakarta</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                    <div class="p-3 border rounded">
+                        <i class="fas fa-phone fa-2x mb-2" style="color: var(--accent-color);"></i>
+                        <h5>Telepon</h5>
+                        <p>(021) 1234-5678</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-3">
+                    <div class="p-3 border rounded">
+                        <i class="fas fa-envelope fa-2x mb-2" style="color: var(--accent-color);"></i>
+                        <h5>Email</h5>
+                        <p>info@gradasinetwork.com</p>
                     </div>
                 </div>
             </div>
@@ -499,107 +398,40 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4">
+                <div class="col-md-4 mb-4">
                     <div class="footer-logo">
                         <span>Gradasi</span>Network
                     </div>
-                    <p>Penyedia layanan internet terpercaya dengan jaringan luas dan dukungan pelanggan 24/7. Komitmen kami adalah menghubungkan Anda ke dunia digital dengan kecepatan dan stabilitas terbaik.</p>
+                    <p>Penyedia layanan internet terpercaya dengan jaringan luas dan dukungan pelanggan 24/7.</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <div class="footer-links">
-                        <h5>Menu</h5>
-                        <ul>
-                            <li><a href="#home">Beranda</a></li>
-                            <li><a href="#layanan">Layanan</a></li>
-                            <li><a href="#paket">Paket</a></li>
-                            <li><a href="#kontak">Kontak</a></li>
-                        </ul>
-                    </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Menu</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-white text-decoration-none">Beranda</a></li>
+                        <li><a href="#layanan" class="text-white text-decoration-none">Layanan</a></li>
+                        <li><a href="#paket" class="text-white text-decoration-none">Paket</a></li>
+                        <li><a href="#kontak" class="text-white text-decoration-none">Kontak</a></li>
+                    </ul>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="footer-links">
-                        <h5>Layanan</h5>
-                        <ul>
-                            <li><a href="#layanan">Internet Rumah</a></li>
-                            <li><a href="#layanan">Internet Bisnis</a></li>
-                            <li><a href="#layanan">Hotspot & Wireless</a></li>
-                            <li><a href="#kontak">Pemasangan Baru</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="footer-links">
-                        <h5>Kontak Kami</h5>
-                        <ul>
-                            <li><i class="fas fa-map-marker-alt me-2"></i> Jl. Teknologi No. 123, Jakarta</li>
-                            <li><i class="fas fa-phone me-2"></i> (021) 1234-5678</li>
-                            <li><i class="fas fa-envelope me-2"></i> info@gradasinetwork.com</li>
-                            <li><i class="fas fa-clock me-2"></i> Support 24/7</li>
-                        </ul>
-                    </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#layanan" class="text-white text-decoration-none">Internet Rumah</a></li>
+                        <li><a href="#layanan" class="text-white text-decoration-none">Internet Bisnis</a></li>
+                        <li><a href="#layanan" class="text-white text-decoration-none">Hotspot & Wireless</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="copyright">
                 <p>&copy; 2023 GradasiNetwork. Hak Cipta Dilindungi.</p>
             </div>
         </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- JavaScript untuk form submission -->
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Ambil nilai dari form
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            
-            // Simulasi pengiriman form
-            alert(`Terima kasih ${name}! Pesan Anda telah berhasil dikirim. Kami akan menghubungi Anda melalui email ${email} segera mengenai "${subject}".`);
-            
-            // Reset form
-            document.getElementById('contactForm').reset();
-            
-            // Scroll ke atas
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Smooth scrolling untuk anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Update active nav link
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
-    </script>
+    </footer>z
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
