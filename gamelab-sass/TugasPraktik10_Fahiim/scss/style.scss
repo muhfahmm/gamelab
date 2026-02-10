@@ -1,0 +1,45 @@
+// ============================================
+// MAIN STYLESHEET - Entry Point
+// ============================================
+
+// Import all partials with namespaces
+@use 'variables' as vars;
+@use 'functions' as func;
+@use 'mixins' as mix;
+@use 'components' as comp;
+
+// Global reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  line-height: vars.$line-height-base;
+  color: vars.$color-neutral-dark;
+  background-color: vars.$color-neutral-light;
+}
+
+header {
+  background-color: vars.$color-primary;
+  color: white;
+  padding: vars.$spacing-lg;
+  text-align: center;
+}
+
+main {
+  max-width: 1200px;
+  margin: vars.$spacing-xl auto;
+  padding: 0 vars.$spacing-md;
+}
+
+footer {
+  background-color: vars.$color-primary;
+  color: white;
+  text-align: center;
+  padding: vars.$spacing-lg;
+  margin-top: vars.$spacing-xl;
+}

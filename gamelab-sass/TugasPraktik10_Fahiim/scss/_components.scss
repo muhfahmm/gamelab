@@ -1,0 +1,42 @@
+// ============================================
+// COMPONENTS - Reusable UI Components
+// ============================================
+
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+// Card component
+// Displays content in a card-like container with shadow and padding
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: vars.$spacing-lg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: vars.$spacing-md;
+  
+  .card-title {
+    font-size: vars.$font-size-large;
+    color: vars.$color-primary;
+    margin-bottom: vars.$spacing-md;
+  }
+  
+  .card-content {
+    font-size: vars.$font-size-base;
+    color: vars.$color-neutral-dark;
+    line-height: vars.$line-height-base;
+  }
+}
+
+// Navbar component
+// Navigation bar with primary background color and centered content
+.navbar {
+  background-color: vars.$color-primary;
+  padding: vars.$spacing-md vars.$spacing-lg;
+  @include mix.flex-center;
+  
+  .navbar-brand {
+    color: white;
+    font-size: vars.$font-size-large;
+    font-weight: bold;
+  }
+}

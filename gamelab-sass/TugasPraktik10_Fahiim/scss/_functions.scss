@@ -1,0 +1,20 @@
+// ============================================
+// FUNCTIONS - Reusable SCSS Functions
+// ============================================
+
+// Function to convert pixels to rem
+// Usage: pxToRem(24px) => 1.5rem
+@function pxToRem($px) {
+  @return ($px / 16px) * 1rem;
+}
+
+// Function to calculate contrast color
+// Returns black for light colors, white for dark colors
+// Usage: getContrastColor(#ffffff) => #000
+@function getContrastColor($color) {
+  @if (lightness($color) > 50%) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}

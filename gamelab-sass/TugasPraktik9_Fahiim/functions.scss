@@ -1,0 +1,60 @@
+// Variables
+$primary-color: #3498db;
+$font-size-base: 16px;
+$padding-base: 20px;
+
+// Custom Function: Convert px to rem
+@function px-to-rem($px) {
+    @return ($px / 16px) * 1rem;
+}
+
+// Custom Function: Calculate total padding
+@function calc-padding($base, $multiplier) {
+    @return $base * $multiplier;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    width: 90%;
+}
+
+.title {
+    color: $primary-color;
+    text-align: center;
+    font-size: px-to-rem(32px); // Custom function usage
+    margin-bottom: $padding-base;
+}
+
+.card {
+    background: white;
+    padding: calc-padding($padding-base, 1.5); // Custom function usage
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid $primary-color;
+
+    p {
+        line-height: 1.6;
+        color: #333;
+        font-size: px-to-rem(18px); // Custom function usage
+        margin-bottom: px-to-rem(10px);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        // Built-in function: lighten()
+        &:hover {
+            color: lighten($primary-color, 10%);
+        }
+    }
+}
