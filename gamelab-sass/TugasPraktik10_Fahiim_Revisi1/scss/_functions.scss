@@ -1,0 +1,19 @@
+// Function to calculate rem from pixels
+@function px-to-rem($px, $base: 16) {
+    @return ($px / $base) * 1rem;
+}
+
+// Function to lighten color
+@function lighten-color($color, $percentage) {
+    @return lighten($color, $percentage);
+}
+
+// Function to darken color
+@function darken-color($color, $percentage) {
+    @return darken($color, $percentage);
+}
+
+// Function to calculate spacing
+@function spacing($multiplier) {
+    @return $multiplier * 1rem;
+}
