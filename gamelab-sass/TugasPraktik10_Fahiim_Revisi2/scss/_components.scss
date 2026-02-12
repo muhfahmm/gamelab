@@ -1,0 +1,84 @@
+@use 'variables' as vars;
+@use 'functions' as funcs;
+@use 'mixins';
+
+// Card component
+.card {
+    background-color: vars.$white;
+    padding: vars.$spacing-lg;
+    margin-bottom: vars.$spacing-md;
+    @include mixins.border-radius(vars.$border-radius);
+    @include mixins.box-shadow(vars.$box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        @include mixins.box-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+    }
+
+    h2 {
+        color: vars.$primary-color;
+        font-size: vars.$font-size-h2;
+        margin-bottom: vars.$spacing-md;
+        border-bottom: 3px solid vars.$secondary-color;
+        padding-bottom: vars.$spacing-sm;
+    }
+
+    p {
+        margin-bottom: vars.$spacing-sm;
+        line-height: vars.$line-height;
+        text-align: justify;
+    }
+
+    ul.steps-list {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            padding: vars.$spacing-sm;
+            margin-bottom: vars.$spacing-xs;
+            background-color: funcs.lighten-color(vars.$primary-color, 45%);
+            @include mixins.border-radius(vars.$border-radius);
+            position: relative;
+            padding-left: vars.$spacing-lg;
+
+            &::before {
+                content: "✓";
+                position: absolute;
+                left: vars.$spacing-sm;
+                color: vars.$secondary-color;
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+// Navbar component
+.navbar {
+    background-color: vars.$primary-color;
+    padding: vars.$spacing-md;
+    @include mixins.clearfix;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        @include mixins.flex-center;
+        gap: vars.$spacing-md;
+
+        li {
+            a {
+                color: vars.$white;
+                text-decoration: none;
+                padding: vars.$spacing-xs vars.$spacing-sm;
+                @include mixins.border-radius(4px);
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: funcs.darken-color(vars.$primary-color, 10%);
+                }
+            }
+        }
+    }
+}
