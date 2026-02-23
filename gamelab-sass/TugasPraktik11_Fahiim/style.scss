@@ -1,0 +1,161 @@
+@use 'utilities' as *;
+@use 'sass:color';
+
+// Global Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, 
+        color.scale($primary-color, $lightness: 45%) 0%, 
+        color.scale($secondary-color, $lightness: 45%) 100%);
+    min-height: 100vh;
+    color: $text-color;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+// Header dengan kondisi @if di mixin
+.header {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    
+    h1 {
+        color: $white;
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        
+        @media (max-width: $breakpoint-mobile) {
+            font-size: 2rem;
+        }
+    }
+    
+    .subtitle {
+        color: color.scale($white, $lightness: -10%);
+        @include responsive-text('large');
+    }
+}
+
+// Content sections
+.content {
+    section {
+        background-color: $white;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        
+        h2 {
+            color: $primary-color;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid $secondary-color;
+            padding-bottom: 0.5rem;
+        }
+        
+        p {
+            @include responsive-text('medium');
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+// Tools Grid dengan loop @for
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+// Tool cards dengan loop @for dan kondisi @if
+@for $i from 1 through 6 {
+    .tool-#{$i} {
+        @if $i % 3 == 1 {
+            background: linear-gradient(135deg, 
+                color.scale($primary-color, $lightness: 40%), 
+                color.scale($primary-color, $lightness: 30%));
+        } @else if $i % 3 == 2 {
+            background: linear-gradient(135deg, 
+                color.scale($secondary-color, $lightness: 40%), 
+                color.scale($secondary-color, $lightness: 30%));
+        } @else {
+            background: linear-gradient(135deg, 
+                color.scale($accent-color, $lightness: 40%), 
+                color.scale($accent-color, $lightness: 30%));
+        }
+    }
+}
+
+.tool-card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: $text-color;
+    }
+    
+    p {
+        @include responsive-text('small');
+        color: color.scale($text-color, $lightness: 20%);
+    }
+}
+
+// Skills list dengan kondisi @if
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    
+    .skill-item {
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease;
+        @include responsive-text('medium');
+        
+        &:hover {
+            transform: translateX(10px);
+        }
+    }
+}
+
+// Footer
+.footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: $white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    
+    p {
+        color: color.scale($text-color, $lightness: 30%);
+        @include responsive-text('small');
+    }
+}

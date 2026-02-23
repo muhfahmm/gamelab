@@ -1,0 +1,69 @@
+@use 'variables' as vars;
+@use 'functions' as funcs;
+@use 'mixins';
+@use 'components';
+
+// Global styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: vars.$font-family;
+    font-size: vars.$font-size-base;
+    color: vars.$text-color;
+    background: linear-gradient(135deg,
+            funcs.lighten-color(vars.$primary-color, 40%) 0%,
+            funcs.lighten-color(vars.$secondary-color, 40%) 100%);
+    min-height: 100vh;
+    line-height: vars.$line-height;
+}
+
+.container {
+    max-width: vars.$container-max-width;
+    margin: 0 auto;
+    padding: vars.$spacing-lg;
+
+    @include mixins.responsive(vars.$breakpoint-mobile) {
+        padding: vars.$spacing-sm;
+    }
+}
+
+.header {
+    text-align: center;
+    padding: vars.$spacing-xl 0;
+    background: linear-gradient(135deg, vars.$primary-color, vars.$secondary-color);
+    @include mixins.border-radius(vars.$border-radius);
+    @include mixins.box-shadow(vars.$box-shadow);
+    margin-bottom: vars.$spacing-lg;
+
+    h1 {
+        color: vars.$white;
+        font-size: vars.$font-size-h1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+        @include mixins.responsive(vars.$breakpoint-mobile) {
+            font-size: 2rem;
+        }
+    }
+}
+
+.content {
+    @include mixins.clearfix;
+}
+
+.footer {
+    text-align: center;
+    padding: vars.$spacing-lg;
+    margin-top: vars.$spacing-xl;
+    background-color: vars.$white;
+    @include mixins.border-radius(vars.$border-radius);
+    @include mixins.box-shadow(vars.$box-shadow);
+
+    p {
+        color: funcs.lighten-color(vars.$text-color, 20%);
+        font-size: 0.9rem;
+    }
+}

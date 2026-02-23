@@ -1,0 +1,12 @@
+{
+  "name": "tugaspraktik10-fahiim-revisi3",
+  "version": "1.0.0",
+  "description": "Tugas Praktik 10 SASS - Revisi 3",
+  "scripts": {
+    "compile": "sass scss/style.scss css/style.css",
+    "watch": "sass --watch scss/style.scss css/style.css"
+  },
+  "keywords": ["sass", "scss", "css"],
+  "author": "Fahiim",
+  "license": "ISC"
+}
