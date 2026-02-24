@@ -1,0 +1,16 @@
+{
+  "name": "tugaspraktik12_fahiim",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "sass": "^1.97.3"
+  }
+}

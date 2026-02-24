@@ -1,0 +1,17 @@
+$primary: #0d6efd;
+$secondary: #6c757d;
+
+// Import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Custom styles
+body {
+    background-color: #f4f6f9;
+}
+
+#pengalaman {
+    h2 {
+        color: $primary;
+        font-weight: bold;
+    }
+}
