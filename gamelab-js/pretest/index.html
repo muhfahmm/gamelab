@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Kalkulator Sederhana</title>
+    <meta name="description" content="Kalkulator sederhana yang dibangun dengan HTML, CSS, dan jQuery.">
+    <!-- Menggunakan font standar yang bersih -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="main-wrapper">
+        <div class="calculator-box">
+            <div class="display-container">
+                <div id="history-view" class="history-text"></div>
+                <div id="main-display" class="result-text">0</div>
+            </div>
+
+            <div class="button-grid">
+                <!-- Baris 1: Utility -->
+                <button class="btn btn-clear" id="clear-btn">AC</button>
+                <button class="btn btn-del" id="del-btn">DEL</button>
+                <button class="btn btn-operator" data-symbol="/">÷</button>
+                <button class="btn btn-operator" data-symbol="*">×</button>
+                
+                <!-- Baris 2: Numbers -->
+                <button class="btn btn-number">7</button>
+                <button class="btn btn-number">8</button>
+                <button class="btn btn-number">9</button>
+                <button class="btn btn-operator" data-symbol="-">−</button>
+                
+                <!-- Baris 3: Numbers -->
+                <button class="btn btn-number">4</button>
+                <button class="btn btn-number">5</button>
+                <button class="btn btn-number">6</button>
+                <button class="btn btn-operator" data-symbol="+">+</button>
+                
+                <!-- Baris 4: Numbers -->
+                <button class="btn btn-number">1</button>
+                <button class="btn btn-number">2</button>
+                <button class="btn btn-number">3</button>
+                <button class="btn btn-equal" id="equal-btn">=</button>
+                
+                <!-- Baris 5: Bottom -->
+                <button class="btn btn-number zero-btn">0</button>
+                <button class="btn btn-number">.</button>
+            </div>
+        </div>
+        
+        <div class="footer-info">
+            <p>Tugas Pre-test: JavaScript & jQuery</p>
+        </div>
+    </div>
+
+    <!-- Panggilan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
