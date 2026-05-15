@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis 06 - Gamelab</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        p { padding: 15px; border: 1px solid #ddd; border-radius: 6px; }
+        .elemen-berkelas { padding: 15px; background-color: #e8f4fd; border: 1px solid #3498db; border-radius: 6px; color: #2980b9; font-weight: bold; }
+        a { display: block; padding: 15px; color: #e67e22; text-decoration: none; border: 1px dashed #e67e22; border-radius: 6px; margin-top: 10px; }
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kuis 06: Manipulasi Elemen</h1>
+        <p id="target-p">1. Ini adalah elemen &lt;p&gt; (Tanpa Class)</p>
+        <div class="elemen-berkelas">2. Ini adalah elemen &lt;div&gt; (Memiliki Class)</div>
+        <a href="https://www.gamelab.id">3. Ini adalah elemen &lt;a&gt; (Memiliki atribut href)</a>
+        <div class="button-group">
+            <button onclick="hideEl()">Hide Element</button>
+            <button onclick="hideClass()">Hide Class</button>
+            <button onclick="hideAttr()">Hide Attribute</button>
+        </div>
+    </div>
+    <script src="kuis06.js"></script>
+</body>
+</html>
