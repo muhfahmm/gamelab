@@ -1,41 +1,13 @@
 $(document).ready(function() {
     let clickCount = 0;
-    const $logBody = $("#log-body");
-
-    function addLog(eventName, message) {
-        if ($logBody.find("div").length === 1 && $logBody.find("div").css("font-style") === "italic") {
-            $logBody.empty();
-        }
-
-        const now = new Date();
-        const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0');
-        
-        const logHtml = `
-            <div class="log-entry">
-                <span class="log-time">[${timeStr}]</span>
-                <span class="log-event event-${eventName}">${eventName}</span>
-                <span class="log-msg">${message}</span>
-            </div>
-        `;
-        
-        $logBody.append(logHtml);
-        $logBody.scrollTop($logBody[0].scrollHeight);
-    }
 
     $("#btn-click").click(function() {
         clickCount++;
         $("#counter-value")
             .text(clickCount)
-            .css("color", "var(--accent-primary)")
-            .animate({ fontSize: "2.4rem" }, 100)
-            .animate({ fontSize: "2rem" }, 100);
-            
-        $(this).addClass("pulse");
-        setTimeout(() => {
-            $(this).removeClass("pulse");
-        }, 1500);
-
-        addLog("click", `Tombol diklik. Nilai counter dinaikkan menjadi: <strong>${clickCount}</strong>`);
+            .css("color", "#0d6efd")
+            .animate({ fontSize: "2.1rem" }, 100)
+            .animate({ fontSize: "1.75rem" }, 100);
     });
 
     $("#magic-box").dblclick(function() {
@@ -44,74 +16,59 @@ $(document).ready(function() {
         
         if (isAlternate) {
             $(this).css({
-                "border-color": "var(--accent-primary)",
-                "background": "rgba(20, 184, 166, 0.08)"
+                "border-color": "#0d6efd",
+                "background-color": "rgba(13, 110, 253, 0.08)"
             });
-            $(this).find("p").text("🌈 Tema Teal Aktif! 🌈");
-            addLog("dblclick", "Double-click box. Mengubah tema halaman ke: <strong>Teal/Amber (Mode Alternatif)</strong>");
+            $(this).find("p").text("✨ Tema Alternatif Aktif! ✨");
         } else {
             $(this).css({
-                "border-color": "var(--border-color)",
-                "background": "transparent"
+                "border-color": "#cbd5e1",
+                "background-color": "transparent"
             });
-            $(this).find("p").text("✨ Double Click Box Ini ✨");
-            addLog("dblclick", "Double-click box. Mengembalikan tema halaman ke: <strong>Indigo/Pink (Default)</strong>");
+            $(this).find("p").text("Double Click Box Ini");
         }
     });
 
     $("#hover-card").mouseenter(function() {
         $(this).css({
-            "transform": "scale(1.05)",
-            "border-color": "var(--accent-secondary)",
-            "box-shadow": "0 10px 25px var(--accent-secondary-glow)"
+            "transform": "scale(1.02)",
+            "border-color": "#198754",
+            "box-shadow": "0 4px 12px rgba(25, 135, 84, 0.15)"
         });
         $("#hover-badge")
-            .text("Kursor Masuk Area!")
-            .css({
-                "background": "var(--accent-secondary)",
-                "color": "#fff"
-            });
-            
-        addLog("mouseenter", "Kursor mouse MEMASUKI area hover card.");
+            .removeClass("bg-secondary")
+            .addClass("bg-success")
+            .text("Kursor Masuk Area!");
     });
 
     $("#hover-card").mouseleave(function() {
         $(this).css({
             "transform": "scale(1)",
-            "border-color": "var(--border-color)",
+            "border-color": "#dee2e6",
             "box-shadow": "none"
         });
         $("#hover-badge")
-            .text("Silakan Hover ke Sini")
-            .css({
-                "background": "rgba(255, 255, 255, 0.05)",
-                "color": "var(--text-secondary)"
-            });
-            
-        addLog("mouseleave", "Kursor mouse KELUAR dari area hover card.");
+            .removeClass("bg-success")
+            .addClass("bg-secondary")
+            .text("Arahkan Mouse ke Sini");
     });
 
-    $("#input-event").focus(function() {
-        $("#input-tip").slideDown(200);
-        $(this).css("background", "rgba(99, 102, 241, 0.05)");
-        addLog("focus", "Input field mendapatkan FOCUS.");
+    $("#input-validation").focus(function() {
+        $("#validation-tip").slideDown(200);
     });
 
-    $("#input-event").blur(function() {
-        $("#input-tip").slideUp(200);
-        $(this).css("background", "rgba(255, 255, 255, 0.03)");
+    $("#input-validation").blur(function() {
+        $("#validation-tip").slideUp(200);
         
         const value = $(this).val().trim();
         if (value === "") {
-            $(this).css("border-color", "rgba(239, 68, 68, 0.5)");
-            addLog("blur", "Input field kehilangan FOCUS (BLUR). Status: <strong>Kosong (Peringatan)</strong>");
+            $(this).addClass("is-invalid").removeClass("is-valid");
         } else {
-            $(this).css("border-color", "rgba(16, 185, 129, 0.5)");
-            addLog("blur", "Input field kehilangan FOCUS (BLUR). Status: <strong>Terisi</strong>");
+            $(this).addClass("is-valid").removeClass("is-invalid");
         }
     });
 
-    $("#input-event").keyup(function(e) {
+    $("#input-keyup").keyup(function(e) {
         const textVal = $(this).val();
         const charLength = textVal.length;
         
@@ -120,27 +77,13 @@ $(document).ready(function() {
         if (charLength > 0) {
             $("#preview-text")
                 .text(textVal)
-                .css({
-                    "color": "var(--text-primary)",
-                    "font-style": "normal"
-                });
+                .removeClass("text-muted fst-italic")
+                .addClass("text-dark");
         } else {
             $("#preview-text")
                 .text("Belum ada input...")
-                .css({
-                    "color": "var(--text-secondary)",
-                    "font-style": "italic"
-                });
+                .removeClass("text-dark")
+                .addClass("text-muted fst-italic");
         }
-
-        addLog("keyup", `Tombol dilepas: <strong>"${e.key}"</strong> (Total: ${charLength} karakter)`);
-    });
-
-    $("#btn-clear-log").click(function() {
-        $logBody.html(`
-            <div class="log-entry" style="grid-template-columns: 1fr; color: var(--text-secondary); font-style: italic; text-align: center;">
-                Log telah dibersihkan. Menunggu interaksi baru...
-            </div>
-        `);
     });
 });
