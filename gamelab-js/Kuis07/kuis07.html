@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,11 @@
         body {
             transition: background-color 0.4s ease;
         }
+
         .theme-alternate {
             background-color: #e2e8f0 !important;
         }
+
         .magic-box {
             border: 2px dashed #cbd5e1;
             height: 120px;
@@ -20,10 +23,12 @@
             user-select: none;
             transition: all 0.2s ease;
         }
+
         .magic-box:hover {
             border-color: #0d6efd;
             background-color: rgba(13, 110, 253, 0.05);
         }
+
         .hover-area {
             border: 1px solid #dee2e6;
             background-color: #f8fafc;
@@ -33,6 +38,7 @@
         }
     </style>
 </head>
+
 <body class="bg-light min-vh-100">
 
     <header class="text-center pt-4 pb-2">
@@ -49,16 +55,19 @@
                         <div>
                             <div class="d-flex align-items-center gap-2 mb-3">
                                 <h2 class="h5 card-title mb-0">1. Click Event</h2>
-                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">click</span>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle">click</span>
                             </div>
                             <p class="text-muted small mb-4">
                                 Klik tombol di bawah untuk meningkatkan nilai counter secara interaktif.
                             </p>
                         </div>
+
                         <div>
                             <button id="btn-click" class="btn btn-primary w-100 py-2 fw-semibold">Klik Saya</button>
                             <div class="text-center mt-3 text-secondary">
-                                Nilai Counter: <span id="counter-value" class="fs-3 fw-bold text-dark d-inline-block ms-1">0</span>
+                                Nilai Counter: <span id="counter-value"
+                                    class="fs-3 fw-bold text-dark d-inline-block ms-1">0</span>
                             </div>
                         </div>
                     </div>
@@ -71,13 +80,15 @@
                         <div>
                             <div class="d-flex align-items-center gap-2 mb-3">
                                 <h2 class="h5 card-title mb-0">2. Double Click Event</h2>
-                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">dblclick</span>
+                                <span
+                                    class="badge bg-primary-subtle text-primary border border-primary-subtle">dblclick</span>
                             </div>
                             <p class="text-muted small mb-4">
                                 Double-click (klik dua kali) box di bawah untuk mengubah warna latar belakang halaman.
                             </p>
                         </div>
-                        <div id="magic-box" class="magic-box d-flex flex-column justify-content-center align-items-center rounded-3">
+                        <div id="magic-box"
+                            class="magic-box d-flex flex-column justify-content-center align-items-center rounded-3">
                             <p class="fw-bold text-dark mb-1">Double Click Box Ini</p>
                             <span class="text-muted small">Klik 2x secara cepat</span>
                         </div>
@@ -91,15 +102,19 @@
                         <div>
                             <div class="d-flex align-items-center gap-2 mb-3">
                                 <h2 class="h5 card-title mb-0">3. Hover (Enter & Leave) Events</h2>
-                                <span class="badge bg-success-subtle text-success border border-success-subtle me-1">mouseenter</span>
-                                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">mouseleave</span>
+                                <span
+                                    class="badge bg-success-subtle text-success border border-success-subtle me-1">mouseenter</span>
+                                <span
+                                    class="badge bg-warning-subtle text-warning border border-warning-subtle">mouseleave</span>
                             </div>
                             <p class="text-muted small mb-4">
                                 Arahkan mouse masuk dan keluar dari area kartu interaktif di bawah.
                             </p>
                         </div>
-                        <div id="hover-card" class="hover-area d-flex justify-content-center align-items-center rounded-3">
-                            <span id="hover-badge" class="badge bg-secondary py-2 px-3 fs-6">Arahkan Mouse ke Sini</span>
+                        <div id="hover-card"
+                            class="hover-area d-flex justify-content-center align-items-center rounded-3">
+                            <span id="hover-badge" class="badge bg-secondary py-2 px-3 fs-6">Arahkan Mouse ke
+                                Sini</span>
                         </div>
                     </div>
                 </div>
@@ -111,13 +126,16 @@
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <h2 class="h5 card-title mb-0">4. Focus & Blur Events</h2>
                             <span class="badge bg-info-subtle text-info border border-info-subtle me-1">focus</span>
-                            <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">blur</span>
+                            <span
+                                class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">blur</span>
                         </div>
                         <p class="text-muted small mb-3">
                             Pilih kolom input di bawah (focus) dan klik di luar area input (blur) untuk validasi.
                         </p>
-                        <input type="text" id="input-validation" class="form-control py-2" placeholder="Klik di sini untuk fokus..." autocomplete="off">
-                        <div id="validation-tip" class="form-text text-primary mt-2" style="display: none;">Kolom input sedang aktif (focus).</div>
+                        <input type="text" id="input-validation" class="form-control py-2"
+                            placeholder="Klik di sini untuk fokus..." autocomplete="off">
+                        <div id="validation-tip" class="form-text text-primary mt-2" style="display: none;">Kolom input
+                            sedang aktif (focus).</div>
                     </div>
                 </div>
             </div>
@@ -127,15 +145,19 @@
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center gap-2 mb-3">
                             <h2 class="h5 card-title mb-0">5. Keyboard Event</h2>
-                            <span class="badge bg-purple-subtle text-purple border border-purple-subtle" style="background-color: #f3e8ff; color: #6b21a8;">keyup</span>
+                            <span class="badge bg-purple-subtle text-purple border border-purple-subtle"
+                                style="background-color: #f3e8ff; color: #6b21a8;">keyup</span>
                         </div>
                         <div class="mb-3">
-                            <input type="text" id="input-keyup" class="form-control py-2" placeholder="Ketik sesuatu di sini..." autocomplete="off">
+                            <input type="text" id="input-keyup" class="form-control py-2"
+                                placeholder="Ketik sesuatu di sini..." autocomplete="off">
                         </div>
                         <div class="bg-light p-3 border rounded-3 position-relative" style="min-height: 80px;">
-                            <div class="text-uppercase text-secondary fw-bold" style="font-size: 0.7rem; letter-spacing: 0.05em;">Live Preview</div>
+                            <div class="text-uppercase text-secondary fw-bold"
+                                style="font-size: 0.7rem; letter-spacing: 0.05em;">Live Preview</div>
                             <div id="preview-text" class="text-muted fst-italic small">Belum ada input...</div>
-                            <div class="position-absolute bottom-0 end-0 p-2 text-secondary small"><span id="char-count">0</span> karakter</div>
+                            <div class="position-absolute bottom-0 end-0 p-2 text-secondary small"><span
+                                    id="char-count">0</span> karakter</div>
                         </div>
                     </div>
                 </div>
@@ -145,4 +167,5 @@
 
     <script src="kuis07.js"></script>
 </body>
+
 </html>

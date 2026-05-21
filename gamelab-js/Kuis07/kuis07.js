@@ -1,7 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
     let clickCount = 0;
 
-    $("#btn-click").click(function() {
+    $("#btn-click").click(function () {
         clickCount++;
         $("#counter-value")
             .text(clickCount)
@@ -10,10 +10,10 @@ $(document).ready(function() {
             .animate({ fontSize: "1.75rem" }, 100);
     });
 
-    $("#magic-box").dblclick(function() {
+    $("#magic-box").dblclick(function () {
         $("body").toggleClass("theme-alternate");
         const isAlternate = $("body").hasClass("theme-alternate");
-        
+
         if (isAlternate) {
             $(this).css({
                 "border-color": "#0d6efd",
@@ -29,7 +29,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#hover-card").mouseenter(function() {
+    $("#hover-card").mouseenter(function () {
         $(this).css({
             "transform": "scale(1.02)",
             "border-color": "#198754",
@@ -41,7 +41,7 @@ $(document).ready(function() {
             .text("Kursor Masuk Area!");
     });
 
-    $("#hover-card").mouseleave(function() {
+    $("#hover-card").mouseleave(function () {
         $(this).css({
             "transform": "scale(1)",
             "border-color": "#dee2e6",
@@ -53,13 +53,13 @@ $(document).ready(function() {
             .text("Arahkan Mouse ke Sini");
     });
 
-    $("#input-validation").focus(function() {
+    $("#input-validation").focus(function () {
         $("#validation-tip").slideDown(200);
     });
 
-    $("#input-validation").blur(function() {
+    $("#input-validation").blur(function () {
         $("#validation-tip").slideUp(200);
-        
+
         const value = $(this).val().trim();
         if (value === "") {
             $(this).addClass("is-invalid").removeClass("is-valid");
@@ -68,12 +68,12 @@ $(document).ready(function() {
         }
     });
 
-    $("#input-keyup").keyup(function(e) {
+    $("#input-keyup").keyup(function (e) {
         const textVal = $(this).val();
         const charLength = textVal.length;
-        
+
         $("#char-count").text(charLength);
-        
+
         if (charLength > 0) {
             $("#preview-text")
                 .text(textVal)
