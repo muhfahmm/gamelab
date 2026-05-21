@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis 07 - Penerapan jQuery Events</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 28, 45, 0.6);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-primary: #6366f1;
+            --accent-primary-glow: rgba(99, 102, 241, 0.3);
+            --accent-secondary: #ec4899;
+            --accent-secondary-glow: rgba(236, 72, 153, 0.3);
+            --accent-tertiary: #10b981;
+            --accent-tertiary-glow: rgba(16, 185, 129, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.theme-alternate {
+            --bg-color: #0c1a1a;
+            --card-bg: rgba(20, 35, 35, 0.7);
+            --accent-primary: #14b8a6;
+            --accent-primary-glow: rgba(20, 184, 166, 0.3);
+            --accent-secondary: #f59e0b;
+            --accent-secondary-glow: rgba(245, 158, 11, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.45;
+            transition: var(--transition);
+        }
+
+        body::before {
+            top: 10%;
+            left: 10%;
+            background: var(--accent-primary);
+        }
+
+        body::after {
+            bottom: 15%;
+            right: 10%;
+            background: var(--accent-secondary);
+        }
+
+        header {
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title span.badge {
+            font-size: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            background: var(--accent-primary-glow);
+            color: var(--accent-primary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-interactive {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--accent-primary-glow);
+        }
+
+        .btn-interactive:hover {
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .btn-interactive:active {
+            transform: translateY(1px);
+        }
+
+        .counter-display {
+            margin-top: 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .counter-val {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: inline-block;
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .magic-box {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition);
+        }
+
+        .magic-box:hover {
+            border-color: var(--accent-secondary);
+            background: rgba(236, 72, 153, 0.05);
+        }
+
+        .magic-box p {
+            font-weight: 500;
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .magic-box span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .hover-area {
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .hover-badge {
+            display: inline-block;
+            padding: 0.35rem 0.8rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.25rem;
+        }
+
+        .input-text {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-text:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-primary-glow);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .input-helper {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-top: 0.5rem;
+            display: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .preview-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .preview-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-text {
+            font-weight: 500;
+            word-wrap: break-word;
+            min-height: 1.5rem;
+        }
+
+        .preview-count {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .logger-container {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            height: 250px;
+        }
+
+        .logger-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .logger-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logger-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+        }
+
+        .btn-clear {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-clear:hover {
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .logger-body {
+            flex-grow: 1;
+            background: rgba(5, 8, 16, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .log-entry {
+            display: grid;
+            grid-template-columns: auto auto 1fr;
+            gap: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .log-entry:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .log-time {
+            color: var(--text-secondary);
+        }
+
+        .log-event {
+            font-weight: 700;
+            padding: 0 0.4rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+
+        .event-click { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+        .event-dblclick { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+        .event-mouseenter { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .event-mouseleave { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .event-focus { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .event-blur { background: rgba(107, 114, 128, 0.15); color: #9ca3af; }
+        .event-keyup { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+
+        .log-msg {
+            color: var(--text-primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 var(--accent-primary-glow); }
+            70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+
+        .pulse {
+            animation: pulse-glow 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Interactive jQuery Events Lab</h1>
+        <p>Praktikum Kuis 07 - Demonstrasi penerapan minimal 5 tipe jQuery Events dengan visualisasi log aktivitas real-time.</p>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-title">
+                    <span>1. Click Event</span>
+                    <span class="badge">click</span>
+                </div>
+                <p style="margin-bottom: 1.25rem; color: var(--text-secondary); font-size: 0.95rem;">
+                    Klik tombol di bawah untuk meningkatkan nilai counter secara interaktif.
+                </p>
+                <button id="btn-click" class="btn-interactive">Klik Saya!</button>
+                <div class="counter-display">
+                    Nilai Counter: <span id="counter-value" class="counter-val">0</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>2. Double Click Event</span>
+                    <span class="badge">dblclick</span>
+                </div>
+                <p style="margin-bottom: 1.25rem; color: var(--text-secondary); font-size: 0.95rem;">
+                    Double-click (klik dua kali) box di bawah untuk mengubah tema dashboard.
+                </p>
+                <div id="magic-box" class="magic-box">
+                    <p>✨ Double Click Box Ini ✨</p>
+                    <span>Klik 2x berturut-turut dengan cepat</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-title">
+                    <span>3. Hover (Enter & Leave) Events</span>
+                    <span class="badge">mouseenter</span>
+                    <span class="badge">mouseleave</span>
+                </div>
+                <p style="margin-bottom: 1.25rem; color: var(--text-secondary); font-size: 0.95rem;">
+                    Arahkan mouse Anda masuk dan keluar dari area kartu interaktif di bawah.
+                </p>
+                <div id="hover-card" class="hover-area">
+                    <span id="hover-badge" class="hover-badge">Silakan Hover ke Sini</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>4. Focus, Blur & Keyboard Events</span>
+                    <span class="badge">focus</span>
+                    <span class="badge">blur</span>
+                    <span class="badge">keyup</span>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="input-event" class="input-text" placeholder="Ketik sesuatu di sini..." autocomplete="off">
+                    <div id="input-tip" class="input-helper">ℹ️ Mengetik akan memicu event 'keyup' dan memperbarui preview secara real-time.</div>
+                </div>
+                <div class="preview-box">
+                    <div class="preview-label">Live Preview</div>
+                    <div id="preview-text" class="preview-text" style="color: var(--text-secondary); font-style: italic;">Belum ada input...</div>
+                    <div class="preview-count"><span id="char-count">0</span> karakter</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card logger-container">
+            <div class="logger-header">
+                <div class="logger-title">Live Activity Log</div>
+                <button id="btn-clear-log" class="btn-clear">Bersihkan Log</button>
+            </div>
+            <div id="log-body" class="logger-body">
+                <div class="log-entry" style="grid-template-columns: 1fr; color: var(--text-secondary); font-style: italic; text-align: center;">
+                    Menunggu interaksi pengguna... Mulai berinteraksi dengan widget di atas untuk melihat log event.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Kuis 07 Pemrograman Web (JS &amp; jQuery). Dikembangkan dengan Gamelab Indonesia.</p>
+    </footer>
+
+    <script src="kuis07.js"></script>
+</body>
+</html>
