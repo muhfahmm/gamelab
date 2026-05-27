@@ -7,109 +7,44 @@
     <title>Kuis 08 - Penerapan jQuery Effects</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts: Outfit -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            --accent-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-            --emerald-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            --amber-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-color);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
-            color: var(--text-main);
+            background-color: #f4f6f9;
+            color: #333;
             min-height: 100vh;
         }
 
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .effect-card {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .glass-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        .effect-card:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .effect-box {
             width: 100%;
             height: 100px;
-            border-radius: 12px;
-            background: var(--primary-gradient);
+            border-radius: 8px;
+            background-color: #0d6efd;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            color: white;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-custom {
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary-gradient {
-            background: var(--primary-gradient);
-            color: white;
-        }
-
-        .btn-primary-gradient:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            color: white;
-        }
-
-        .btn-accent-gradient {
-            background: var(--accent-gradient);
-            color: white;
-        }
-
-        .btn-accent-gradient:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            color: white;
-        }
-
-        .btn-outline-custom {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
-
-        .btn-outline-custom:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
             color: white;
         }
 
         .badge-effect {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--border-color);
-            color: #8b5cf6;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            color: #495057;
             font-family: monospace;
             font-size: 0.85rem;
         }
@@ -117,11 +52,10 @@
         /* Custom alert/notification style */
         .sliding-alert {
             display: none;
-            background: var(--emerald-gradient);
-            border: none;
-            border-radius: 12px;
+            background-color: #198754;
+            border-radius: 8px;
             color: white;
-            padding: 15px;
+            padding: 12px;
             margin-top: 15px;
             font-weight: 500;
         }
@@ -130,22 +64,19 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: var(--accent-gradient);
-            box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
+            background-color: #6f42c1;
             position: relative;
         }
     </style>
 </head>
 
-<body>
-    <header class="text-center py-5">
+<body class="bg-light">
+    <header class="text-center py-4 bg-white border-bottom mb-4">
         <div class="container">
-            <span class="badge badge-effect px-3 py-2 mb-2">Tugas Mandiri</span>
-            <h1 class="display-5 fw-extrabold mb-2" style="background: linear-gradient(to right, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                Interaktif jQuery Effects
-            </h1>
-            <p class="text-muted col-lg-6 mx-auto">
-                Halaman ini mendemonstrasikan minimal 5 efek jQuery interaktif (Show/Hide, Fading, Sliding, Custom Animation, dan Stop Animation) dengan desain premium.
+            <span class="badge bg-secondary mb-2">Tugas Mandiri</span>
+            <h1 class="h3 fw-bold text-dark mb-1">Penerapan jQuery Effects</h1>
+            <p class="text-muted mb-0 small">
+                Mengimplementasikan 5 jenis efek jQuery: Show/Hide/Toggle, Fading, Sliding, Custom Animation, dan Stop.
             </p>
         </div>
     </header>
@@ -154,7 +85,7 @@
         <div class="row g-4">
             <!-- 1. Show & Hide / Toggle Effect -->
             <div class="col-md-6 col-lg-4">
-                <div class="card glass-card h-100 p-4">
+                <div class="card effect-card h-100 p-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <h2 class="h5 fw-bold mb-0">1. Show, Hide & Toggle</h2>
                         <span class="badge badge-effect">toggle()</span>
@@ -162,22 +93,22 @@
                     <p class="text-muted small mb-4">
                         Menampilkan, menyembunyikan, atau melakukan toggle elemen kotak secara instan atau dengan durasi tertentu.
                     </p>
-                    <div class="mb-4 d-flex justify-content-center align-items-center" style="height: 120px; background: rgba(0,0,0,0.2); border-radius: 12px;">
+                    <div class="mb-4 d-flex justify-content-center align-items-center bg-light border rounded" style="height: 120px;">
                         <div id="toggle-box" class="effect-box" style="max-width: 200px;">
                             Kotak Efek 1
                         </div>
                     </div>
                     <div class="d-flex gap-2 mt-auto">
-                        <button id="btn-toggle-show" class="btn btn-outline-custom btn-sm flex-fill">Show</button>
-                        <button id="btn-toggle-hide" class="btn btn-outline-custom btn-sm flex-fill">Hide</button>
-                        <button id="btn-toggle" class="btn btn-primary-gradient btn-sm flex-fill">Toggle</button>
+                        <button id="btn-toggle-show" class="btn btn-outline-secondary btn-sm flex-fill">Show</button>
+                        <button id="btn-toggle-hide" class="btn btn-outline-secondary btn-sm flex-fill">Hide</button>
+                        <button id="btn-toggle" class="btn btn-primary btn-sm flex-fill">Toggle</button>
                     </div>
                 </div>
             </div>
 
             <!-- 2. Fading Effects -->
             <div class="col-md-6 col-lg-4">
-                <div class="card glass-card h-100 p-4">
+                <div class="card effect-card h-100 p-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <h2 class="h5 fw-bold mb-0">2. Fading Effects</h2>
                         <span class="badge badge-effect">fadeToggle()</span>
@@ -185,22 +116,22 @@
                     <p class="text-muted small mb-4">
                         Mengubah opacity suatu elemen untuk memberikan efek transisi pudar masuk (fade in) atau pudar keluar (fade out).
                     </p>
-                    <div class="mb-4 d-flex justify-content-center align-items-center" style="height: 120px; background: rgba(0,0,0,0.2); border-radius: 12px;">
-                        <div id="fade-box" class="effect-box" style="max-width: 200px; background: var(--accent-gradient); box-shadow: 0 4px 20px rgba(244, 63, 94, 0.3);">
+                    <div class="mb-4 d-flex justify-content-center align-items-center bg-light border rounded" style="height: 120px;">
+                        <div id="fade-box" class="effect-box" style="max-width: 200px; background-color: #dc3545;">
                             Kotak Efek 2
                         </div>
                     </div>
                     <div class="d-flex gap-2 mt-auto">
-                        <button id="btn-fade-in" class="btn btn-outline-custom btn-sm flex-fill">Fade In</button>
-                        <button id="btn-fade-out" class="btn btn-outline-custom btn-sm flex-fill">Fade Out</button>
-                        <button id="btn-fade-toggle" class="btn btn-accent-gradient btn-sm flex-fill">Fade Toggle</button>
+                        <button id="btn-fade-in" class="btn btn-outline-secondary btn-sm flex-fill">Fade In</button>
+                        <button id="btn-fade-out" class="btn btn-outline-secondary btn-sm flex-fill">Fade Out</button>
+                        <button id="btn-fade-toggle" class="btn btn-danger btn-sm flex-fill">Fade Toggle</button>
                     </div>
                 </div>
             </div>
 
             <!-- 3. Sliding Effects -->
             <div class="col-md-6 col-lg-4">
-                <div class="card glass-card h-100 p-4">
+                <div class="card effect-card h-100 p-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <h2 class="h5 fw-bold mb-0">3. Sliding Effects</h2>
                         <span class="badge badge-effect">slideToggle()</span>
@@ -209,22 +140,22 @@
                         Menampilkan atau menyembunyikan elemen dengan efek slide gulung ke atas (slide up) atau ke bawah (slide down).
                     </p>
                     <div class="mb-4 d-flex flex-column justify-content-center" style="min-height: 120px;">
-                        <button id="btn-trigger-alert" class="btn btn-primary-gradient w-100 mb-2">Tampilkan Pesan Notifikasi</button>
+                        <button id="btn-trigger-alert" class="btn btn-success w-100 mb-2">Tampilkan Notifikasi</button>
                         <div id="sliding-alert" class="sliding-alert text-center">
-                            🎉 Notifikasi berhasil ditampilkan dengan <strong>slideDown()</strong>!
+                            Notifikasi berhasil ditampilkan dengan slideDown()!
                         </div>
                     </div>
                     <div class="d-flex gap-2 mt-auto">
-                        <button id="btn-slide-up" class="btn btn-outline-custom btn-sm flex-fill">Slide Up</button>
-                        <button id="btn-slide-down" class="btn btn-outline-custom btn-sm flex-fill">Slide Down</button>
-                        <button id="btn-slide-toggle" class="btn btn-outline-custom btn-sm flex-fill">Slide Toggle</button>
+                        <button id="btn-slide-up" class="btn btn-outline-secondary btn-sm flex-fill">Slide Up</button>
+                        <button id="btn-slide-down" class="btn btn-outline-secondary btn-sm flex-fill">Slide Down</button>
+                        <button id="btn-slide-toggle" class="btn btn-outline-secondary btn-sm flex-fill">Slide Toggle</button>
                     </div>
                 </div>
             </div>
 
             <!-- 4 & 5. Custom Animation & Stop Effects -->
             <div class="col-md-12 col-lg-8 mx-auto">
-                <div class="card glass-card p-4">
+                <div class="card effect-card p-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
                             <h2 class="h5 fw-bold mb-0">4 & 5. Custom Animation & Stop Effect</h2>
@@ -238,7 +169,7 @@
                         </div>
                     </div>
 
-                    <div class="p-4 mb-4 rounded-3 d-flex align-items-center justify-content-start overflow-hidden position-relative" style="height: 160px; background: rgba(0,0,0,0.3); border: 1px dashed var(--border-color);">
+                    <div class="p-4 mb-4 rounded d-flex align-items-center justify-content-start overflow-hidden position-relative bg-light border" style="height: 160px;">
                         <div id="animated-orb" class="animated-orb d-flex align-items-center justify-content-center text-white fw-bold" style="left: 0px;">
                             Orb
                         </div>
@@ -246,13 +177,13 @@
 
                     <div class="row g-2">
                         <div class="col-sm-3">
-                            <button id="btn-anim-move" class="btn btn-primary-gradient w-100 btn-sm py-2">Gerakkan & Ubah Ukuran</button>
+                            <button id="btn-anim-move" class="btn btn-primary w-100 btn-sm py-2">Gerakkan & Ubah</button>
                         </div>
                         <div class="col-sm-3">
-                            <button id="btn-anim-reset" class="btn btn-outline-custom w-100 btn-sm py-2">Reset Posisi</button>
+                            <button id="btn-anim-reset" class="btn btn-outline-secondary w-100 btn-sm py-2">Reset Posisi</button>
                         </div>
                         <div class="col-sm-3">
-                            <button id="btn-anim-loop" class="btn btn-accent-gradient w-100 btn-sm py-2">Mulai Loop Panjang</button>
+                            <button id="btn-anim-loop" class="btn btn-secondary w-100 btn-sm py-2">Loop Panjang</button>
                         </div>
                         <div class="col-sm-3">
                             <button id="btn-anim-stop" class="btn btn-danger w-100 btn-sm py-2 fw-semibold">🛑 Stop Animasi</button>
@@ -263,8 +194,8 @@
         </div>
     </main>
 
-    <footer class="text-center py-4 border-top border-secondary-subtle mt-5" style="background: rgba(15, 23, 42, 0.8);">
-        <p class="text-muted mb-0 small">Kuis 08 - gamelab.id - Pasangkan dengan jQuery Effects</p>
+    <footer class="text-center py-3 border-top mt-5 bg-white text-secondary">
+        <p class="mb-0 small">Kuis 08 - gamelab.id - Penerapan jQuery Effects</p>
     </footer>
 
     <!-- Path ke script js kuis08.js -->
