@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis 09 - jQuery DOM Methods</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --accent: #db2777;
+            --accent-glow: rgba(219, 39, 119, 0.2);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.25rem;
+        }
+
+        .control-group h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-group h3 i {
+            color: var(--primary);
+        }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 0.75rem;
+        }
+
+        button, input[type="text"] {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input[type="text"] {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: var(--text-main);
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #be185d;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .preview-display {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 400px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .preview-display.glowing-theme {
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--accent-glow);
+            background: #fff5f7;
+        }
+
+        .preview-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .preview-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .interactive-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .interactive-box.highlight {
+            background: #e0e7ff;
+            border-color: var(--primary);
+        }
+
+        .list-container {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .list-item {
+            background: #f1f5f9;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: fadeIn 0.3s ease;
+            border-left: 3px solid var(--primary);
+            color: var(--text-main);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge-img {
+            max-width: 100px;
+            border-radius: 8px;
+            display: block;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Interactive jQuery DOM Methods</h1>
+            <p>Implementasi Tugas Kuis #9 - Gamlab-JS</p>
+        </header>
+
+        <div class="showcase-grid">
+            <div class="control-panel">
+                
+                <div class="control-group">
+                    <h3><i class="fa-solid fa-pen-to-square"></i> 1. Content (.text() & .html())</h3>
+                    <input type="text" id="inputContent" placeholder="Ketik sesuatu di sini..." value="Halo Dunia Kreatif!">
+                    <div class="btn-grid">
+                        <button id="btnText" class="btn-primary"><i class="fa-solid fa-font"></i> Ubah Text</button>
+                        <button id="btnHtml" class="btn-accent"><i class="fa-solid fa-code"></i> Ubah HTML</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3><i class="fa-solid fa-circle-plus"></i> 2. Insertion (.append() & .prepend())</h3>
+                    <div class="btn-grid">
+                        <button id="btnAppend" class="btn-primary"><i class="fa-solid fa-arrow-down-long"></i> Append</button>
+                        <button id="btnPrepend" class="btn-accent"><i class="fa-solid fa-arrow-up-long"></i> Prepend</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3><i class="fa-solid fa-image"></i> 3. Attribute (.attr() / .removeAttr())</h3>
+                    <div class="btn-grid">
+                        <button id="btnChangeAttr" class="btn-primary"><i class="fa-solid fa-shuffle"></i> Ubah Icon</button>
+                        <button id="btnRemoveAttr" class="btn-danger"><i class="fa-solid fa-trash-can"></i> Hapus Link/Attr</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3><i class="fa-solid fa-palette"></i> 4. CSS Class (.toggleClass() & .addClass())</h3>
+                    <div class="btn-grid">
+                        <button id="btnToggleClass" class="btn-accent"><i class="fa-solid fa-wand-magic-sparkles"></i> Toggle Glow</button>
+                        <button id="btnHighlight" class="btn-primary"><i class="fa-solid fa-highlighter"></i> Highlight Box</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3><i class="fa-solid fa-trash"></i> 5. Deletion (.empty() & .remove())</h3>
+                    <div class="btn-grid">
+                        <button id="btnEmptyList" class="btn-danger"><i class="fa-solid fa-eraser"></i> Empty List</button>
+                        <button id="btnRemoveBox" class="btn-danger"><i class="fa-solid fa-circle-xmark"></i> Remove Box</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="preview-canvas">
+                <h3 style="margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Live Preview Canvas</h3>
+                <div id="previewDisplay" class="preview-display">
+                    
+                    <div>
+                        <h2 id="headerTarget" class="preview-header">Header Target</h2>
+                        <p id="textTarget" class="preview-text">Teks target ini akan berubah ketika Anda menekan tombol di samping kiri.</p>
+                    </div>
+
+                    <div class="interactive-box" id="attrBox">
+                        <p style="font-weight: 600; margin-bottom: 0.25rem;">Elemen Ber-Atribut:</p>
+                        <a id="linkTarget" href="https://www.gamelab.id" target="_blank" style="color: var(--primary); font-size: 0.9rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            <i id="iconTarget" class="fa-solid fa-graduation-cap fa-lg"></i>
+                            <span id="linkText">Kunjungi Gamelab Indonesia</span>
+                        </a>
+                    </div>
+
+                    <div class="interactive-box" id="listBox">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem;">Daftar Item Dinamis:</p>
+                        <ul id="listTarget" class="list-container">
+                            <li class="list-item">Item Bawaan Awal</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Dibuat oleh Siswa Gamlab &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="kuis09.js"></script>
+</body>
+</html>
