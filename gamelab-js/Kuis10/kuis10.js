@@ -1,9 +1,6 @@
 $(document).ready(function () {
-  // Emiten default
   let watchlist = ['BBCA', 'BBRI', 'BMRI', 'TLKM', 'ASII', 'GOTO', 'ADRO', 'UNVR'];
   let activeStockData = {};
-  
-  // Data cadangan jika API utama terhambat rate-limit / CORS proxy bermasalah
   const STOCK_FALLBACKS = {
     '^JKSE': { name: 'IHSG (Indeks Gabungan)', price: 7180.50, prevClose: 7120.30 },
     'BBCA.JK': { name: 'Bank Central Asia Tbk.', price: 10125, prevClose: 10075 },
@@ -16,10 +13,8 @@ $(document).ready(function () {
     'UNVR.JK': { name: 'Unilever Indonesia Tbk.', price: 3120, prevClose: 3150 }
   };
 
-  // Simpan data historis simulasi untuk chart modal
   const simulatedHistory = {};
 
-  // Memulai pemuatan data awal
   initApp();
 
   function initApp() {
@@ -27,7 +22,6 @@ $(document).ready(function () {
     refreshAllData();
   }
 
-  // Load watchlist dari LocalStorage
   function loadWatchlistFromStorage() {
     const stored = localStorage.getItem('indostock_watchlist');
     if (stored) {
@@ -35,22 +29,18 @@ $(document).ready(function () {
     }
   }
 
-  // Simpan watchlist ke LocalStorage
   function saveWatchlistToStorage() {
     localStorage.setItem('indostock_watchlist', JSON.stringify(watchlist));
   }
 
-  // Segarkan semua data (IHSG + Watchlist)
   function refreshAllData() {
     showShimmer();
     $('#btn-refresh i').addClass('fa-spin');
 
-    // Ambil data IHSG
     fetchStockData('^JKSE', function (ihsgData) {
       updateIHSGWidget(ihsgData);
     });
 
-    // Ambil data semua saham di Watchlist
     let loadedCount = 0;
     const totalToLoad = watchlist.length;
     activeStockData = {};
@@ -76,7 +66,6 @@ $(document).ready(function () {
     });
   }
 
-  // Mengambil data saham via AJAX
   function fetchStockData(symbol, callback) {
     const cleanSymbol = symbol.toUpperCase();
     const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${cleanSymbol}`;
@@ -93,56 +82,47 @@ $(document).ready(function () {
           if (innerData.chart && innerData.chart.result && innerData.chart.result[0]) {
             const result = innerData.chart.result[0];
             const meta = result.meta;
-            
-            // Format data standar
             const data = {
               symbol: cleanSymbol,
               name: getFallbackName(cleanSymbol),
               price: meta.regularMarketPrice,
               prevClose: meta.chartPreviousClose || meta.regularMarketPrice,
               volume: meta.regularMarketVolume || 'N/A',
-              open: meta.regularMarketPrice * 0.99 // Estimasi open price
+              open: meta.regularMarketPrice * 0.99
             };
-            
             callback(data);
             return;
           }
         } catch (e) {
           console.warn(`JSON parsing error for ${cleanSymbol}, using fallback.`, e);
         }
-        // Jika data format tidak sesuai, gunakan fallback
         callback(getFallbackData(cleanSymbol));
       },
       error: function (xhr, status, error) {
         console.warn(`AJAX error fetching ${cleanSymbol}, using fallback.`, error);
-        // Fallback jika API/Proxy down
         callback(getFallbackData(cleanSymbol));
       }
     });
   }
 
-  // Mendapatkan nama cadangan emiten
   function getFallbackName(symbol) {
     if (STOCK_FALLBACKS[symbol]) return STOCK_FALLBACKS[symbol].name;
     return `${symbol.replace('.JK', '')} Perusahaan`;
   }
 
-  // Mendapatkan data cadangan + jitter acak untuk simulasi live data
   function getFallbackData(symbol) {
     let base = STOCK_FALLBACKS[symbol];
     if (!base) {
-      // Buat data default acak untuk simbol baru
       const randomPrice = Math.floor(Math.random() * 8000) + 100;
       base = {
         name: `${symbol.replace('.JK', '')} Emiten`,
         price: randomPrice,
         prevClose: randomPrice * (1 + (Math.random() * 0.04 - 0.02))
       };
-      STOCK_FALLBACKS[symbol] = base; // Simpan untuk sesi ini
+      STOCK_FALLBACKS[symbol] = base;
     }
 
-    // Tambahkan jitter kecil (+/- 0.5%) agar data terasa "live" saat di-refresh
-    const jitterPercent = (Math.random() * 0.01) - 0.005; // -0.5% to +0.5%
+    const jitterPercent = (Math.random() * 0.01) - 0.005;
     const currentPrice = Math.round(base.price * (1 + jitterPercent));
 
     return {
@@ -155,7 +135,6 @@ $(document).ready(function () {
     };
   }
 
-  // Memperbarui IHSG Banner widget
   function updateIHSGWidget(data) {
     const price = data.price;
     const prevClose = data.prevClose;
@@ -172,7 +151,6 @@ $(document).ready(function () {
     tag.find('i').removeClass('fa-arrow-up fa-arrow-down').addClass(change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down');
   }
 
-  // Render semua kartu saham di Watchlist
   function renderWatchlist() {
     const container = $('#stocks-container');
     container.empty();
@@ -181,7 +159,6 @@ $(document).ready(function () {
     const query = $('#search-input').val().toLowerCase();
 
     Object.keys(activeStockData).forEach(function (symbol) {
-      // Filter pencarian
       if (query && !symbol.toLowerCase().includes(query) && !activeStockData[symbol].name.toLowerCase().includes(query)) {
         return;
       }
@@ -229,7 +206,6 @@ $(document).ready(function () {
     }
   }
 
-  // Tampilkan efek shimmer loading
   function showShimmer() {
     $('#stocks-container').html(`
       <div class="shimmer-wrapper">
@@ -242,10 +218,8 @@ $(document).ready(function () {
   }
 
   function hideShimmer() {
-    // Di-handle langsung di renderWatchlist
   }
 
-  // Format Angka ke IDR
   function formatNumber(num, decimals = 0) {
     return Number(num).toLocaleString('id-ID', {
       minimumFractionDigits: decimals,
@@ -253,35 +227,28 @@ $(document).ready(function () {
     });
   }
 
-  // Handle Event: Refresh
   $('#btn-refresh').on('click', function () {
     refreshAllData();
   });
 
-  // Handle Event: Pencarian
   $('#search-input').on('input', function () {
     renderWatchlist();
   });
 
-  // Handle Event: Hapus Emiten dari Watchlist
   $(document).on('click', '.btn-remove-stock', function (e) {
-    e.stopPropagation(); // Mencegah terbukanya modal detail
+    e.stopPropagation();
     const sym = $(this).data('symbol');
     watchlist = watchlist.filter(item => item.toUpperCase() !== sym.toUpperCase());
     saveWatchlistToStorage();
-    
-    // Hapus dari data aktif
     delete activeStockData[sym];
     renderWatchlist();
   });
 
-  // Handle Event: Tambah Emiten Baru ke Watchlist
   $('#add-stock-form').on('submit', function (e) {
     e.preventDefault();
     const inputSym = $('#stock-code-input').val().trim().toUpperCase();
     if (!inputSym) return;
 
-    // Bersihkan format input
     const cleanSym = inputSym.replace('.JK', '');
 
     if (watchlist.includes(cleanSym)) {
@@ -290,7 +257,6 @@ $(document).ready(function () {
       return;
     }
 
-    // Cek harga / ambil data melalui API
     const fullSymbol = cleanSym + '.JK';
     showShimmer();
     
@@ -304,7 +270,6 @@ $(document).ready(function () {
     });
   });
 
-  // Handle Event: Klik Kartu Saham untuk Menampilkan Modal Detail & Grafik
   $(document).on('click', '.stock-card', function () {
     const sym = $(this).data('symbol');
     const data = activeStockData[sym];
@@ -314,7 +279,6 @@ $(document).ready(function () {
     const changePercent = (change / data.prevClose) * 100;
     const isUp = change >= 0;
 
-    // Update data modal
     $('#modal-stock-symbol').text(data.symbol);
     $('#modal-stock-name').text(data.name);
     $('#modal-stock-price-tag').text(`Rp ${formatNumber(data.price)}`);
@@ -327,27 +291,22 @@ $(document).ready(function () {
     $('#modal-open-price').text(`Rp ${formatNumber(data.open)}`);
     $('#modal-volume').text(data.volume);
 
-    // Tampilkan modal
     $('#detail-modal').addClass('active');
 
-    // Buat/gambar chart sparkline
     drawSparkline(sym, data.price, isUp);
   });
 
-  // Tutup Modal
   $('#btn-close-modal, #detail-modal').on('click', function (e) {
     if (e.target === this || this.id === 'btn-close-modal') {
       $('#detail-modal').removeClass('active');
     }
   });
 
-  // Menggambar Sparkline di Canvas HTML5
   function drawSparkline(symbol, currentPrice, isUp) {
     const canvas = document.getElementById('sparkline-chart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
-    // Set resolusi internal agar tajam
     canvas.width = canvas.parentElement.clientWidth;
     canvas.height = 150;
 
@@ -355,7 +314,6 @@ $(document).ready(function () {
     const height = canvas.height;
     ctx.clearRect(0, 0, width, height);
 
-    // Generate riwayat harga acak jika belum ada
     if (!simulatedHistory[symbol]) {
       const historyPoints = [];
       let lastPrice = currentPrice * 0.95;
@@ -366,7 +324,6 @@ $(document).ready(function () {
       simulatedHistory[symbol] = historyPoints;
     }
 
-    // Tambahkan harga terbaru ke histori
     const history = [...simulatedHistory[symbol]];
     history.push(currentPrice);
     if (history.length > 25) history.shift();
@@ -376,13 +333,11 @@ $(document).ready(function () {
     const max = Math.max(...history);
     const range = max - min === 0 ? 1 : max - min;
 
-    // Set styling visual
     const lineColor = isUp ? '#10b981' : '#ef4444';
     const fillGradient = ctx.createLinearGradient(0, 0, 0, height);
     fillGradient.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.25)');
     fillGradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
 
-    // Gambar Jalur Grafik (Line)
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = 3;
@@ -403,14 +358,12 @@ $(document).ready(function () {
     });
     ctx.stroke();
 
-    // Gambar Gradien Area (Fill)
     ctx.lineTo((pointsCount - 1) * stepX, height);
     ctx.lineTo(0, height);
     ctx.closePath();
     ctx.fillStyle = fillGradient;
     ctx.fill();
 
-    // Gambar Titik Penanda Terakhir
     const lastX = (pointsCount - 1) * stepX;
     const lastY = height - 15 - ((currentPrice - min) / range) * (height - 30);
     ctx.beginPath();
@@ -419,6 +372,6 @@ $(document).ready(function () {
     ctx.shadowBlur = 8;
     ctx.shadowColor = lineColor;
     ctx.fill();
-    ctx.shadowBlur = 0; // reset shadow
+    ctx.shadowBlur = 0;
   }
 });

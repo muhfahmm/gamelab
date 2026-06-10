@@ -4,19 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IndoStock - Pengecek Harga Saham Indonesia</title>
-  <!-- Google Fonts: Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="kuis10.css">
 </head>
 <body>
 
   <div class="app-container">
-    <!-- Header/Navbar -->
     <header class="app-header">
       <div class="logo">
         <i class="fa-solid fa-chart-line logo-icon"></i>
@@ -28,7 +24,6 @@
       </div>
     </header>
 
-    <!-- IHSG Summary Widget -->
     <section class="ihsg-banner">
       <div class="ihsg-info">
         <span class="ihsg-label">Indeks Harga Saham Gabungan (IHSG)</span>
@@ -46,7 +41,6 @@
       </div>
     </section>
 
-    <!-- Control Bar: Search & Add Watchlist -->
     <section class="control-bar">
       <div class="search-box">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -60,7 +54,6 @@
       </form>
     </section>
 
-    <!-- Watchlist Grid -->
     <main class="watchlist-section">
       <div class="section-header">
         <h3>Daftar Pantau Saham (IDR)</h3>
@@ -68,7 +61,6 @@
       </div>
       
       <div class="stocks-grid" id="stocks-container">
-        <!-- Cards will be injected by jQuery AJAX -->
         <div class="shimmer-wrapper">
           <div class="shimmer-card"></div>
           <div class="shimmer-card"></div>
@@ -78,13 +70,11 @@
       </div>
     </main>
 
-    <!-- Footer -->
     <footer class="app-footer">
       <p>&copy; 2026 IndoStock. Data disediakan melalui Yahoo Finance API. Dibuat dengan jQuery & AJAX.</p>
     </footer>
   </div>
 
-  <!-- Detail Modal -->
   <div class="modal-overlay" id="detail-modal">
     <div class="modal-content">
       <button class="modal-close" id="btn-close-modal">
@@ -125,9 +115,7 @@
     </div>
   </div>
 
-  <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <!-- Custom JavaScript -->
   <script src="kuis10.js"></script>
 </body>
 </html>
