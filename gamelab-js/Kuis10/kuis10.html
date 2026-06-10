@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IndoStock - Pengecek Harga Saham Indonesia</title>
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="kuis10.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header/Navbar -->
+    <header class="app-header">
+      <div class="logo">
+        <i class="fa-solid fa-chart-line logo-icon"></i>
+        <h1>Indo<span>Stock</span></h1>
+      </div>
+      <div class="market-status">
+        <span class="status-dot pulsing"></span>
+        <span class="status-text">IHSG Live</span>
+      </div>
+    </header>
+
+    <!-- IHSG Summary Widget -->
+    <section class="ihsg-banner">
+      <div class="ihsg-info">
+        <span class="ihsg-label">Indeks Harga Saham Gabungan (IHSG)</span>
+        <div class="ihsg-values">
+          <h2 id="ihsg-price">--</h2>
+          <span id="ihsg-change" class="change-tag">
+            <i class="fa-solid"></i> <span>--</span>
+          </span>
+        </div>
+      </div>
+      <div class="ihsg-actions">
+        <button id="btn-refresh" class="btn btn-primary">
+          <i class="fa-solid fa-rotate"></i> Perbarui
+        </button>
+      </div>
+    </section>
+
+    <!-- Control Bar: Search & Add Watchlist -->
+    <section class="control-bar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" placeholder="Cari kode saham (e.g. BBCA, TLKM)...">
+      </div>
+      <form id="add-stock-form" class="add-stock-form">
+        <input type="text" id="stock-code-input" placeholder="Kode Emiten (e.g. ASII)" required>
+        <button type="submit" class="btn btn-secondary">
+          <i class="fa-solid fa-plus"></i> Watchlist
+        </button>
+      </form>
+    </section>
+
+    <!-- Watchlist Grid -->
+    <main class="watchlist-section">
+      <div class="section-header">
+        <h3>Daftar Pantau Saham (IDR)</h3>
+        <span class="count-tag"><span id="watchlist-count">0</span> Saham</span>
+      </div>
+      
+      <div class="stocks-grid" id="stocks-container">
+        <!-- Cards will be injected by jQuery AJAX -->
+        <div class="shimmer-wrapper">
+          <div class="shimmer-card"></div>
+          <div class="shimmer-card"></div>
+          <div class="shimmer-card"></div>
+          <div class="shimmer-card"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>&copy; 2026 IndoStock. Data disediakan melalui Yahoo Finance API. Dibuat dengan jQuery & AJAX.</p>
+    </footer>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="btn-close-modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h2 id="modal-stock-symbol">BBCA.JK</h2>
+          <span id="modal-stock-name">Bank Central Asia Tbk.</span>
+        </div>
+        <span id="modal-stock-price-tag">Rp --</span>
+      </div>
+      <div class="modal-body">
+        <div class="price-stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Perubahan</span>
+            <span class="stat-value" id="modal-change-val">--</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Penutupan Sebelumnya</span>
+            <span class="stat-value" id="modal-prev-close">Rp --</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Harga Pembukaan</span>
+            <span class="stat-value" id="modal-open-price">Rp --</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Volume Transaksi</span>
+            <span class="stat-value" id="modal-volume">--</span>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <span class="chart-title">Visualisasi Tren Terakhir (Simulasi)</span>
+          <canvas id="sparkline-chart" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="kuis10.js"></script>
+</body>
+</html>
