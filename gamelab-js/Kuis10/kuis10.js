@@ -1,193 +1,267 @@
 $(document).ready(function () {
-  let watchlist = ['BBCA', 'BBRI', 'BMRI', 'TLKM', 'ASII', 'GOTO', 'ADRO', 'UNVR'];
-  let activeStockData = {};
-  const STOCK_FALLBACKS = {
-    '^JKSE': { name: 'IHSG (Indeks Gabungan)', price: 7180.50, prevClose: 7120.30 },
-    'BBCA.JK': { name: 'Bank Central Asia Tbk.', price: 10125, prevClose: 10075 },
-    'BBRI.JK': { name: 'Bank Rakyat Indonesia Tbk.', price: 4850, prevClose: 4920 },
-    'BMRI.JK': { name: 'Bank Mandiri Tbk.', price: 6150, prevClose: 6050 },
-    'TLKM.JK': { name: 'Telkom Indonesia Tbk.', price: 3450, prevClose: 3420 },
-    'ASII.JK': { name: 'Astra International Tbk.', price: 4720, prevClose: 4800 },
-    'GOTO.JK': { name: 'GoTo Gojek Tokopedia Tbk.', price: 62, prevClose: 64 },
-    'ADRO.JK': { name: 'Adaro Energy Indonesia Tbk.', price: 2850, prevClose: 2810 },
-    'UNVR.JK': { name: 'Unilever Indonesia Tbk.', price: 3120, prevClose: 3150 }
+  // Daftar kota default
+  let cityWatchlist = ['Jakarta', 'Surabaya', 'Tokyo', 'London', 'New York'];
+  let activeWeatherData = {};
+  let simulatedHistory = {};
+
+  // Peta Weather Code Open-Meteo ke Deskripsi & Ikon
+  const WEATHER_CODES = {
+    0: { desc: 'Cerah', icon: 'fa-solid fa-sun', color: '#f59e0b' },
+    1: { desc: 'Sebagian Cerah', icon: 'fa-solid fa-cloud-sun', color: '#f59e0b' },
+    2: { desc: 'Cerah Berawan', icon: 'fa-solid fa-cloud-sun', color: '#60a5fa' },
+    3: { desc: 'Mendung', icon: 'fa-solid fa-cloud', color: '#94a3b8' },
+    45: { desc: 'Berkabut', icon: 'fa-solid fa-smog', color: '#94a3b8' },
+    48: { desc: 'Rime Kabut', icon: 'fa-solid fa-smog', color: '#cbd5e1' },
+    51: { desc: 'Gerimis Ringan', icon: 'fa-solid fa-cloud-rain', color: '#60a5fa' },
+    53: { desc: 'Gerimis Sedang', icon: 'fa-solid fa-cloud-rain', color: '#3b82f6' },
+    55: { desc: 'Gerimis Lebat', icon: 'fa-solid fa-cloud-showers-heavy', color: '#2563eb' },
+    61: { desc: 'Hujan Ringan', icon: 'fa-solid fa-cloud-rain', color: '#3b82f6' },
+    63: { desc: 'Hujan Sedang', icon: 'fa-solid fa-cloud-showers-heavy', color: '#1d4ed8' },
+    65: { desc: 'Hujan Lebat', icon: 'fa-solid fa-cloud-showers-heavy', color: '#1e3a8a' },
+    71: { desc: 'Salju Ringan', icon: 'fa-solid fa-snowflake', color: '#93c5fd' },
+    73: { desc: 'Salju Sedang', icon: 'fa-solid fa-snowflake', color: '#bfdbfe' },
+    75: { desc: 'Salju Lebat', icon: 'fa-solid fa-snowflake', color: '#eff6ff' },
+    80: { desc: 'Hujan Pancaroba Ringan', icon: 'fa-solid fa-cloud-rain', color: '#60a5fa' },
+    81: { desc: 'Hujan Pancaroba Sedang', icon: 'fa-solid fa-cloud-showers-heavy', color: '#3b82f6' },
+    82: { desc: 'Hujan Pancaroba Lebat', icon: 'fa-solid fa-cloud-showers-water', color: '#1d4ed8' },
+    95: { desc: 'Badai Petir', icon: 'fa-solid fa-cloud-bolt', color: '#a855f7' },
+    96: { desc: 'Badai Petir dengan Hujan Es Ringan', icon: 'fa-solid fa-cloud-bolt', color: '#d8b4fe' },
+    99: { desc: 'Badai Petir dengan Hujan Es Lebat', icon: 'fa-solid fa-cloud-bolt', color: '#c084fc' }
   };
 
-  const simulatedHistory = {};
+  const FALLBACK_WEATHER = {
+    'JAKARTA': { temp: 31.5, humidity: 78, windSpeed: 12, precip: 1.2, code: 2, country: 'Indonesia' },
+    'SURABAYA': { temp: 33.0, humidity: 70, windSpeed: 15, precip: 0.0, code: 0, country: 'Indonesia' },
+    'TOKYO': { temp: 18.2, humidity: 62, windSpeed: 8, precip: 0.0, code: 1, country: 'Jepang' },
+    'LONDON': { temp: 12.4, humidity: 85, windSpeed: 20, precip: 3.4, code: 61, country: 'Britania Raya' },
+    'NEW YORK': { temp: 22.1, humidity: 55, windSpeed: 10, precip: 0.0, code: 3, country: 'Amerika Serikat' }
+  };
 
+  // Panggil Inisialisasi Aplikasi
   initApp();
 
   function initApp() {
+    startClock();
     loadWatchlistFromStorage();
-    refreshAllData();
+    refreshAllWeatherData();
+    setupCalculator();
+  }
+
+  // Jam Realtime di Header
+  function startClock() {
+    setInterval(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      $('#current-time').text(timeStr);
+    }, 1000);
   }
 
   function loadWatchlistFromStorage() {
-    const stored = localStorage.getItem('indostock_watchlist');
+    const stored = localStorage.getItem('tempcast_watchlist');
     if (stored) {
-      watchlist = JSON.parse(stored);
+      cityWatchlist = JSON.parse(stored);
     }
   }
 
   function saveWatchlistToStorage() {
-    localStorage.setItem('indostock_watchlist', JSON.stringify(watchlist));
+    localStorage.setItem('tempcast_watchlist', JSON.stringify(cityWatchlist));
   }
 
-  function refreshAllData() {
+  // Refresh data semua kota
+  function refreshAllWeatherData() {
     showShimmer();
-    $('#btn-refresh i').addClass('fa-spin');
-
-    fetchStockData('^JKSE', function (ihsgData) {
-      updateIHSGWidget(ihsgData);
-    });
-
+    activeWeatherData = {};
     let loadedCount = 0;
-    const totalToLoad = watchlist.length;
-    activeStockData = {};
+    const totalToLoad = cityWatchlist.length;
 
     if (totalToLoad === 0) {
-      hideShimmer();
-      renderWatchlist();
-      $('#btn-refresh i').removeClass('fa-spin');
+      renderCitiesGrid();
+      updateMainBanner(null);
       return;
     }
 
-    watchlist.forEach(function (symbol) {
-      const fullSymbol = symbol.endsWith('.JK') || symbol === '^JKSE' ? symbol : symbol + '.JK';
-      fetchStockData(fullSymbol, function (data) {
-        activeStockData[symbol.toUpperCase()] = data;
+    cityWatchlist.forEach(function (cityName) {
+      fetchWeatherData(cityName, function (data) {
+        activeWeatherData[cityName.toUpperCase()] = data;
         loadedCount++;
         if (loadedCount === totalToLoad) {
-          hideShimmer();
-          renderWatchlist();
-          $('#btn-refresh i').removeClass('fa-spin');
+          renderCitiesGrid();
+          // Set kota pertama sebagai highlight utama di banner
+          const firstCityKey = cityWatchlist[0].toUpperCase();
+          if (activeWeatherData[firstCityKey]) {
+            updateMainBanner(activeWeatherData[firstCityKey]);
+          }
         }
       });
     });
   }
 
-  function fetchStockData(symbol, callback) {
-    const cleanSymbol = symbol.toUpperCase();
-    const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${cleanSymbol}`;
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+  // AJAX Fetch Data Cuaca
+  function fetchWeatherData(cityName, callback) {
+    const cleanCity = cityName.trim();
+    const cleanCityUpper = cleanCity.toUpperCase();
+    
+    // Step 1: Geocoding API untuk mencari Lat/Long kota
+    const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanCity)}&count=1&language=id&format=json`;
 
     $.ajax({
-      url: proxyUrl,
+      url: geoUrl,
       type: 'GET',
       dataType: 'json',
-      timeout: 6000,
-      success: function (response) {
-        try {
-          const innerData = JSON.parse(response.contents);
-          if (innerData.chart && innerData.chart.result && innerData.chart.result[0]) {
-            const result = innerData.chart.result[0];
-            const meta = result.meta;
-            const data = {
-              symbol: cleanSymbol,
-              name: getFallbackName(cleanSymbol),
-              price: meta.regularMarketPrice,
-              prevClose: meta.chartPreviousClose || meta.regularMarketPrice,
-              volume: meta.regularMarketVolume || 'N/A',
-              open: meta.regularMarketPrice * 0.99
-            };
-            callback(data);
-            return;
-          }
-        } catch (e) {
-          console.warn(`JSON parsing error for ${cleanSymbol}, using fallback.`, e);
+      timeout: 5000,
+      success: function (geoResponse) {
+        if (geoResponse.results && geoResponse.results[0]) {
+          const result = geoResponse.results[0];
+          const lat = result.latitude;
+          const lon = result.longitude;
+          const country = result.country || 'N/A';
+          const officialName = result.name;
+
+          // Step 2: Forecast API untuk mendapatkan data cuaca saat ini
+          const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m`;
+
+          $.ajax({
+            url: weatherUrl,
+            type: 'GET',
+            dataType: 'json',
+            timeout: 5000,
+            success: function (weatherResponse) {
+              if (weatherResponse.current) {
+                const cur = weatherResponse.current;
+                const weatherData = {
+                  cityName: officialName,
+                  country: country,
+                  temp: cur.temperature_2m,
+                  apparentTemp: cur.apparent_temperature,
+                  humidity: cur.relative_humidity_2m,
+                  windSpeed: cur.wind_speed_10m,
+                  precipitation: cur.precipitation,
+                  weatherCode: cur.weather_code
+                };
+                callback(weatherData);
+              } else {
+                callback(getFallbackData(cleanCityUpper));
+              }
+            },
+            error: function () {
+              callback(getFallbackData(cleanCityUpper));
+            }
+          });
+        } else {
+          callback(getFallbackData(cleanCityUpper));
         }
-        callback(getFallbackData(cleanSymbol));
       },
-      error: function (xhr, status, error) {
-        console.warn(`AJAX error fetching ${cleanSymbol}, using fallback.`, error);
-        callback(getFallbackData(cleanSymbol));
+      error: function () {
+        callback(getFallbackData(cleanCityUpper));
       }
     });
   }
 
-  function getFallbackName(symbol) {
-    if (STOCK_FALLBACKS[symbol]) return STOCK_FALLBACKS[symbol].name;
-    return `${symbol.replace('.JK', '')} Perusahaan`;
-  }
-
-  function getFallbackData(symbol) {
-    let base = STOCK_FALLBACKS[symbol];
+  // Fallback Data jika API error/offline
+  function getFallbackData(cityNameUpper) {
+    let base = FALLBACK_WEATHER[cityNameUpper];
     if (!base) {
-      const randomPrice = Math.floor(Math.random() * 8000) + 100;
+      // Buat data acak yang realistis
+      const randomTemp = parseFloat((Math.random() * 25 + 10).toFixed(1)); // 10 to 35 C
       base = {
-        name: `${symbol.replace('.JK', '')} Emiten`,
-        price: randomPrice,
-        prevClose: randomPrice * (1 + (Math.random() * 0.04 - 0.02))
+        temp: randomTemp,
+        humidity: Math.floor(Math.random() * 40) + 50, // 50 to 90%
+        windSpeed: Math.floor(Math.random() * 25) + 5,  // 5 to 30 km/h
+        precip: parseFloat((Math.random() * 5).toFixed(1)),
+        code: [0, 1, 2, 3, 61, 95][Math.floor(Math.random() * 6)],
+        country: 'Global'
       };
-      STOCK_FALLBACKS[symbol] = base;
+      FALLBACK_WEATHER[cityNameUpper] = base;
     }
 
-    const jitterPercent = (Math.random() * 0.01) - 0.005;
-    const currentPrice = Math.round(base.price * (1 + jitterPercent));
-
     return {
-      symbol: symbol,
-      name: base.name,
-      price: currentPrice,
-      prevClose: Math.round(base.prevClose),
-      volume: '12.5M',
-      open: Math.round(base.prevClose * 1.002)
+      cityName: cityNameUpper.charAt(0) + cityNameUpper.slice(1).toLowerCase(),
+      country: base.country,
+      temp: base.temp,
+      apparentTemp: parseFloat((base.temp + (Math.random() * 2 - 1)).toFixed(1)),
+      humidity: base.humidity,
+      windSpeed: base.windSpeed,
+      precipitation: base.precip,
+      weatherCode: base.code
     };
   }
 
-  function updateIHSGWidget(data) {
-    const price = data.price;
-    const prevClose = data.prevClose;
-    const change = price - prevClose;
-    const changePercent = (change / prevClose) * 100;
+  // Update Tampilan Banner Utama
+  function updateMainBanner(data) {
+    if (!data) {
+      $('#main-city-name').text('Pilih atau Tambah Kota');
+      $('#main-temp-val').text('--');
+      $('#main-temp-f').text('--');
+      $('#main-temp-r').text('--');
+      $('#main-temp-k').text('--');
+      $('#main-weather-desc').text('');
+      $('#main-weather-icon').attr('class', 'fa-solid fa-cloud-sun weather-main-icon');
+      return;
+    }
 
-    $('#ihsg-price').text(formatNumber(price, 2));
+    const info = getWeatherInfo(data.weatherCode);
+    $('#main-city-name').text(`${data.cityName}, ${data.country}`);
+    $('#main-temp-val').text(data.temp.toFixed(1));
+    $('#main-weather-desc').text(info.desc);
     
-    const changeText = `${change >= 0 ? '+' : ''}${formatNumber(change, 2)} (${change >= 0 ? '+' : ''}${changePercent.toFixed(2)}%)`;
-    const tag = $('#ihsg-change');
-    tag.removeClass('up down');
-    tag.addClass(change >= 0 ? 'up' : 'down');
-    tag.find('span').text(changeText);
-    tag.find('i').removeClass('fa-arrow-up fa-arrow-down').addClass(change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down');
+    // Set ikon & warnanya
+    $('#main-weather-icon').attr('class', `${info.icon} weather-main-icon`).css('color', info.color);
+
+    // Hitung konversi
+    const fahr = convertTemp(data.temp, 'C', 'F');
+    const rea = convertTemp(data.temp, 'C', 'R');
+    const kel = convertTemp(data.temp, 'C', 'K');
+
+    $('#main-temp-f').text(fahr.toFixed(1));
+    $('#main-temp-r').text(rea.toFixed(1));
+    $('#main-temp-k').text(kel.toFixed(0));
   }
 
-  function renderWatchlist() {
-    const container = $('#stocks-container');
+  // Render Grid Kota-kota Pantauan
+  function renderCitiesGrid() {
+    const container = $('#cities-container');
     container.empty();
-    
     let count = 0;
-    const query = $('#search-input').val().toLowerCase();
 
-    Object.keys(activeStockData).forEach(function (symbol) {
-      if (query && !symbol.toLowerCase().includes(query) && !activeStockData[symbol].name.toLowerCase().includes(query)) {
-        return;
-      }
+    cityWatchlist.forEach(function (cityName) {
+      const key = cityName.toUpperCase();
+      const data = activeWeatherData[key];
+      if (!data) return;
 
       count++;
-      const data = activeStockData[symbol];
-      const change = data.price - data.prevClose;
-      const changePercent = (change / data.prevClose) * 100;
-      const isUp = change >= 0;
+      const info = getWeatherInfo(data.weatherCode);
+      const fahr = convertTemp(data.temp, 'C', 'F');
+      const rea = convertTemp(data.temp, 'C', 'R');
+      const kel = convertTemp(data.temp, 'C', 'K');
 
       const cardHtml = `
-        <div class="stock-card" data-symbol="${symbol}">
-          <button class="btn-remove-stock" data-symbol="${symbol}" title="Hapus dari daftar pantau">
+        <div class="weather-card" data-city-key="${key}">
+          <button class="btn-remove-city" data-city-name="${cityName}" title="Hapus Kota">
             <i class="fa-solid fa-trash"></i>
           </button>
           <div class="card-top">
             <div>
-              <span class="card-symbol">${symbol}</span>
-              <span class="card-name">${data.name}</span>
+              <span class="card-city">${data.cityName}</span>
+              <span class="card-country">${data.country}</span>
             </div>
           </div>
           <div class="card-middle">
-            <span class="card-price">Rp ${formatNumber(data.price)}</span>
+            <span class="card-temp">${data.temp.toFixed(1)}°C</span>
+            <i class="${info.icon} card-icon" style="color: ${info.color}"></i>
           </div>
           <div class="card-bottom">
-            <span class="card-change ${isUp ? 'price-up' : 'price-down'}">
-              <i class="fa-solid ${isUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'}"></i>
-              ${isUp ? '+' : ''}${changePercent.toFixed(2)}%
-            </span>
+            <div class="card-conv-unit">
+              <span class="unit-val">${fahr.toFixed(1)}°F</span>
+              <span class="unit-lbl">Fahr</span>
+            </div>
+            <div class="card-conv-unit">
+              <span class="unit-val">${rea.toFixed(1)}°R</span>
+              <span class="unit-lbl">Rea</span>
+            </div>
+            <div class="card-conv-unit">
+              <span class="unit-val">${kel.toFixed(0)}K</span>
+              <span class="unit-lbl">Kelv</span>
+            </div>
           </div>
         </div>
       `;
@@ -199,17 +273,22 @@ $(document).ready(function () {
     if (count === 0) {
       container.append(`
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
-          <i class="fa-solid fa-folder-open" style="font-size: 48px; margin-bottom: 15px; display: block; color: rgba(255,255,255,0.1);"></i>
-          Tidak ada emiten yang ditemukan. Silakan tambahkan kode saham baru.
+          <i class="fa-solid fa-cloud-sun-rain" style="font-size: 48px; margin-bottom: 15px; display: block; color: rgba(255,255,255,0.1);"></i>
+          Belum ada kota yang dipantau. Tambahkan kota baru di atas.
         </div>
       `);
     }
   }
 
+  // Pembantu pencarian ikon & deskripsi cuaca
+  function getWeatherInfo(code) {
+    return WEATHER_CODES[code] || { desc: 'Cuaca Tidak Diketahui', icon: 'fa-solid fa-cloud', color: '#94a3b8' };
+  }
+
+  // Tampilkan Shimmer Loading
   function showShimmer() {
-    $('#stocks-container').html(`
+    $('#cities-container').html(`
       <div class="shimmer-wrapper">
-        <div class="shimmer-card"></div>
         <div class="shimmer-card"></div>
         <div class="shimmer-card"></div>
         <div class="shimmer-card"></div>
@@ -217,92 +296,197 @@ $(document).ready(function () {
     `);
   }
 
-  function hideShimmer() {
-  }
+  // Logika Kalkulator Konversi
+  function setupCalculator() {
+    // Jalankan kalkulasi pertama kali
+    performCalc();
 
-  function formatNumber(num, decimals = 0) {
-    return Number(num).toLocaleString('id-ID', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals
+    // Event listeners
+    $('#calc-value').on('input', performCalc);
+    $('#calc-from, #calc-to').on('change', performCalc);
+
+    // Tombol Swap
+    $('#btn-swap-units').on('click', function () {
+      const fromVal = $('#calc-from').val();
+      const toVal = $('#calc-to').val();
+      
+      $('#calc-from').val(toVal);
+      $('#calc-to').val(fromVal);
+      
+      performCalc();
     });
   }
 
-  $('#btn-refresh').on('click', function () {
-    refreshAllData();
-  });
-
-  $('#search-input').on('input', function () {
-    renderWatchlist();
-  });
-
-  $(document).on('click', '.btn-remove-stock', function (e) {
-    e.stopPropagation();
-    const sym = $(this).data('symbol');
-    watchlist = watchlist.filter(item => item.toUpperCase() !== sym.toUpperCase());
-    saveWatchlistToStorage();
-    delete activeStockData[sym];
-    renderWatchlist();
-  });
-
-  $('#add-stock-form').on('submit', function (e) {
-    e.preventDefault();
-    const inputSym = $('#stock-code-input').val().trim().toUpperCase();
-    if (!inputSym) return;
-
-    const cleanSym = inputSym.replace('.JK', '');
-
-    if (watchlist.includes(cleanSym)) {
-      alert('Emiten ini sudah ada di watchlist!');
-      $('#stock-code-input').val('');
+  function performCalc() {
+    const val = parseFloat($('#calc-value').val());
+    if (isNaN(val)) {
+      $('#calc-result-value').text('--');
       return;
     }
 
-    const fullSymbol = cleanSym + '.JK';
-    showShimmer();
+    const fromUnit = $('#calc-from').val();
+    const toUnit = $('#calc-to').val();
+    const result = convertTemp(val, fromUnit, toUnit);
+
+    $('#calc-result-value').text(result.toFixed(2));
     
-    fetchStockData(fullSymbol, function (data) {
-      watchlist.push(cleanSym);
-      saveWatchlistToStorage();
-      activeStockData[cleanSym] = data;
-      
-      $('#stock-code-input').val('');
-      refreshAllData();
+    // Label Unit
+    const unitLabels = { C: '°C', F: '°F', R: '°R', K: 'K' };
+    $('#calc-result-unit').text(unitLabels[toUnit]);
+  }
+
+  // Fungsi Inti Konversi Suhu
+  function convertTemp(value, from, to) {
+    if (from === to) return value;
+
+    // Pertama, konversi dari asal ke Celsius
+    let celsius;
+    if (from === 'C') {
+      celsius = value;
+    } else if (from === 'F') {
+      celsius = (value - 32) / 1.8;
+    } else if (from === 'R') {
+      celsius = value / 0.8;
+    } else if (from === 'K') {
+      celsius = value - 273.15;
+    }
+
+    // Kedua, konversi dari Celsius ke tujuan
+    if (to === 'C') {
+      return celsius;
+    } else if (to === 'F') {
+      return celsius * 1.8 + 32;
+    } else if (to === 'R') {
+      return celsius * 0.8;
+    } else if (to === 'K') {
+      return celsius + 273.15;
+    }
+    return value;
+  }
+
+  // Event Handler Auto-Search & Form Pencarian
+  let searchTimeout;
+  $('#city-input').on('input', function () {
+    const query = $(this).val().trim();
+    if (!query) {
+      $('.weather-card').show();
+      return;
+    }
+
+    // Filter lokal kartu kota yang sudah ada
+    $('.weather-card').each(function () {
+      const cityKey = $(this).data('city-key').toLowerCase();
+      if (cityKey.includes(query.toLowerCase())) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+
+    // Otomatis fetch data dari API jika mengetik kota baru (min 3 karakter) setelah delay 1 detik
+    clearTimeout(searchTimeout);
+    if (query.length >= 3) {
+      searchTimeout = setTimeout(function () {
+        const key = query.toUpperCase();
+        if (!cityWatchlist.map(c => c.toUpperCase()).includes(key)) {
+          fetchWeatherData(query, function (data) {
+            if (!cityWatchlist.map(c => c.toUpperCase()).includes(data.cityName.toUpperCase())) {
+              cityWatchlist.push(data.cityName);
+              saveWatchlistToStorage();
+              activeWeatherData[data.cityName.toUpperCase()] = data;
+              renderCitiesGrid();
+              updateMainBanner(data);
+              $('#city-input').val('');
+            }
+          });
+        }
+      }, 1000);
+    }
+  });
+
+  $('#search-city-form').on('submit', function (e) {
+    e.preventDefault();
+    clearTimeout(searchTimeout);
+    const newCity = $('#city-input').val().trim();
+    if (!newCity) return;
+
+    const key = newCity.toUpperCase();
+    if (cityWatchlist.map(c => c.toUpperCase()).includes(key)) {
+      $('#city-input').val('');
+      return;
+    }
+
+    showShimmer();
+    fetchWeatherData(newCity, function (data) {
+      if (!cityWatchlist.map(c => c.toUpperCase()).includes(data.cityName.toUpperCase())) {
+        cityWatchlist.push(data.cityName);
+        saveWatchlistToStorage();
+        activeWeatherData[data.cityName.toUpperCase()] = data;
+        $('#city-input').val('');
+        refreshAllWeatherData();
+      }
     });
   });
 
-  $(document).on('click', '.stock-card', function () {
-    const sym = $(this).data('symbol');
-    const data = activeStockData[sym];
+  // Event Handler Hapus Kota
+  $(document).on('click', '.btn-remove-city', function (e) {
+    e.stopPropagation();
+    const nameToRemove = $(this).data('city-name');
+    cityWatchlist = cityWatchlist.filter(c => c.toUpperCase() !== nameToRemove.toUpperCase());
+    saveWatchlistToStorage();
+    delete activeWeatherData[nameToRemove.toUpperCase()];
+    renderCitiesGrid();
+
+    // Reset banner jika list kosong
+    if (cityWatchlist.length > 0) {
+      updateMainBanner(activeWeatherData[cityWatchlist[0].toUpperCase()]);
+    } else {
+      updateMainBanner(null);
+    }
+  });
+
+  // Klik Kartu untuk Modal Detail
+  $(document).on('click', '.weather-card', function () {
+    const key = $(this).data('city-key');
+    const data = activeWeatherData[key];
     if (!data) return;
 
-    const change = data.price - data.prevClose;
-    const changePercent = (change / data.prevClose) * 100;
-    const isUp = change >= 0;
+    // Banner Utama update fokus ke kota yang diklik
+    updateMainBanner(data);
 
-    $('#modal-stock-symbol').text(data.symbol);
-    $('#modal-stock-name').text(data.name);
-    $('#modal-stock-price-tag').text(`Rp ${formatNumber(data.price)}`);
-    
-    const changeValEl = $('#modal-change-val');
-    changeValEl.text(`${isUp ? '+' : ''}${formatNumber(change)} (${isUp ? '+' : ''}${changePercent.toFixed(2)}%)`);
-    changeValEl.removeClass('price-up price-down').addClass(isUp ? 'price-up' : 'price-down');
+    const info = getWeatherInfo(data.weatherCode);
 
-    $('#modal-prev-close').text(`Rp ${formatNumber(data.prevClose)}`);
-    $('#modal-open-price').text(`Rp ${formatNumber(data.open)}`);
-    $('#modal-volume').text(data.volume);
+    // Isi Modal
+    $('#modal-city-name').text(`${data.cityName}, ${data.country}`);
+    $('#modal-weather-desc').text(info.desc);
+    $('#modal-temp-tag').text(`${data.temp.toFixed(1)} °C`);
+
+    $('#modal-apparent-temp').text(`${data.apparentTemp.toFixed(1)} °C`);
+    $('#modal-humidity').text(`${data.humidity} %`);
+    $('#modal-wind-speed').text(`${data.windSpeed} km/h`);
+    $('#modal-precipitation').text(`${data.precipitation} mm`);
+
+    // Konversi lengkap
+    $('#detail-c').text(`${data.temp.toFixed(1)} °C`);
+    $('#detail-f').text(`${convertTemp(data.temp, 'C', 'F').toFixed(1)} °F`);
+    $('#detail-r').text(`${convertTemp(data.temp, 'C', 'R').toFixed(1)} °R`);
+    $('#detail-k').text(`${convertTemp(data.temp, 'C', 'K').toFixed(0)} K`);
 
     $('#detail-modal').addClass('active');
 
-    drawSparkline(sym, data.price, isUp);
+    // Gambar Grafik Tren Suhu
+    drawSparkline(key, data.temp);
   });
 
+  // Tutup Modal
   $('#btn-close-modal, #detail-modal').on('click', function (e) {
     if (e.target === this || this.id === 'btn-close-modal') {
       $('#detail-modal').removeClass('active');
     }
   });
 
-  function drawSparkline(symbol, currentPrice, isUp) {
+  // Fungsi menggambar grafik simulasi suhu harian
+  function drawSparkline(cityKey, currentTemp) {
     const canvas = document.getElementById('sparkline-chart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -314,29 +498,29 @@ $(document).ready(function () {
     const height = canvas.height;
     ctx.clearRect(0, 0, width, height);
 
-    if (!simulatedHistory[symbol]) {
+    // Buat data riwayat temperatur jika belum ada (simulasi 24 jam)
+    if (!simulatedHistory[cityKey]) {
       const historyPoints = [];
-      let lastPrice = currentPrice * 0.95;
-      for (let i = 0; i < 20; i++) {
-        lastPrice = lastPrice * (1 + (Math.random() * 0.02 - 0.009));
-        historyPoints.push(lastPrice);
+      let base = currentTemp;
+      for (let i = 0; i < 24; i++) {
+        // Suhu biasanya turun malam hari dan naik siang hari
+        const hour = i;
+        const timeFactor = Math.sin((hour - 6) * Math.PI / 12); // Puncak pada jam 12-14 siang
+        const tempAtHour = base + (timeFactor * 4) + (Math.random() * 1.5 - 0.75);
+        historyPoints.push(tempAtHour);
       }
-      simulatedHistory[symbol] = historyPoints;
+      simulatedHistory[cityKey] = historyPoints;
     }
 
-    const history = [...simulatedHistory[symbol]];
-    history.push(currentPrice);
-    if (history.length > 25) history.shift();
-    simulatedHistory[symbol] = history;
-
+    const history = simulatedHistory[cityKey];
     const min = Math.min(...history);
     const max = Math.max(...history);
     const range = max - min === 0 ? 1 : max - min;
 
-    const lineColor = isUp ? '#10b981' : '#ef4444';
+    const lineColor = '#3b82f6';
     const fillGradient = ctx.createLinearGradient(0, 0, 0, height);
-    fillGradient.addColorStop(0, isUp ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.25)');
-    fillGradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
+    fillGradient.addColorStop(0, 'rgba(59, 130, 246, 0.35)');
+    fillGradient.addColorStop(1, 'rgba(19, 26, 44, 0)');
 
     ctx.beginPath();
     ctx.strokeStyle = lineColor;
@@ -349,7 +533,7 @@ $(document).ready(function () {
 
     history.forEach((val, i) => {
       const x = i * stepX;
-      const y = height - 15 - ((val - min) / range) * (height - 30);
+      const y = height - 20 - ((val - min) / range) * (height - 40);
       if (i === 0) {
         ctx.moveTo(x, y);
       } else {
@@ -364,14 +548,10 @@ $(document).ready(function () {
     ctx.fillStyle = fillGradient;
     ctx.fill();
 
-    const lastX = (pointsCount - 1) * stepX;
-    const lastY = height - 15 - ((currentPrice - min) / range) * (height - 30);
-    ctx.beginPath();
-    ctx.arc(lastX, lastY, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = lineColor;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = lineColor;
-    ctx.fill();
-    ctx.shadowBlur = 0;
+    // Gambar label suhu minimal dan maksimal di atas kanvas
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '10px Outfit';
+    ctx.fillText(`Min: ${min.toFixed(1)}°C`, 10, height - 10);
+    ctx.fillText(`Max: ${max.toFixed(1)}°C`, width - 80, height - 10);
   }
 });

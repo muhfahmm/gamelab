@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IndoStock - Pengecek Harga Saham Indonesia</title>
+  <title>TempCast - Weather & Temperature Converter</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,54 +15,59 @@
   <div class="app-container">
     <header class="app-header">
       <div class="logo">
-        <i class="fa-solid fa-chart-line logo-icon"></i>
-        <h1>Indo<span>Stock</span></h1>
+        <i class="fa-solid fa-cloud-sun-rain logo-icon"></i>
+        <h1>Temp<span>Cast</span></h1>
       </div>
-      <div class="market-status">
-        <span class="status-dot pulsing"></span>
-        <span class="status-text">IHSG Live</span>
+      <div class="live-time">
+        <i class="fa-regular fa-clock"></i>
+        <span id="current-time">--:--:--</span>
       </div>
     </header>
 
-    <section class="ihsg-banner">
-      <div class="ihsg-info">
-        <span class="ihsg-label">Indeks Harga Saham Gabungan (IHSG)</span>
-        <div class="ihsg-values">
-          <h2 id="ihsg-price">--</h2>
-          <span id="ihsg-change" class="change-tag">
-            <i class="fa-solid"></i> <span>--</span>
-          </span>
+    <!-- Section: Cuaca Kota Utama (Highlight) -->
+    <section class="weather-banner" id="main-weather-banner">
+      <div class="banner-left">
+        <span class="banner-subtitle">Cuaca Saat Ini</span>
+        <h2 id="main-city-name">Memuat...</h2>
+        <div class="weather-status-wrapper">
+          <i id="main-weather-icon" class="fa-solid fa-cloud-sun weather-main-icon"></i>
+          <span id="main-weather-desc">Cerah Berawan</span>
         </div>
       </div>
-      <div class="ihsg-actions">
-        <button id="btn-refresh" class="btn btn-primary">
-          <i class="fa-solid fa-rotate"></i> Perbarui
-        </button>
+      <div class="banner-right">
+        <div class="banner-temp-group">
+          <span id="main-temp-val">--</span>
+          <span class="banner-temp-unit">°C</span>
+        </div>
+        <div class="banner-conversions">
+          <span class="conv-item"><strong id="main-temp-f">--</strong> °F</span>
+          <span class="conv-item"><strong id="main-temp-r">--</strong> °R</span>
+          <span class="conv-item"><strong id="main-temp-k">--</strong> K</span>
+        </div>
       </div>
     </section>
 
+    <!-- Section: Kontrol & Pencarian -->
     <section class="control-bar">
-      <div class="search-box">
+      <form id="search-city-form" class="search-box">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="search-input" placeholder="Cari kode saham (e.g. BBCA, TLKM)...">
-      </div>
-      <form id="add-stock-form" class="add-stock-form">
-        <input type="text" id="stock-code-input" placeholder="Kode Emiten (e.g. ASII)" required>
-        <button type="submit" class="btn btn-secondary">
-          <i class="fa-solid fa-plus"></i> Watchlist
+        <input type="text" id="city-input" placeholder="Cari dan tambahkan kota (e.g. Jakarta, Tokyo, London)..." required>
+        <button type="submit" class="btn btn-primary btn-search">
+          <i class="fa-solid fa-plus"></i> Tambah Kota
         </button>
       </form>
     </section>
 
+    <!-- Main Section: Grid Cuaca Kota -->
     <main class="watchlist-section">
       <div class="section-header">
-        <h3>Daftar Pantau Saham (IDR)</h3>
-        <span class="count-tag"><span id="watchlist-count">0</span> Saham</span>
+        <h3>Kota Terpantau</h3>
+        <span class="count-tag"><span id="watchlist-count">0</span> Kota</span>
       </div>
       
-      <div class="stocks-grid" id="stocks-container">
+      <div class="stocks-grid" id="cities-container">
+        <!-- Shimmer loading state -->
         <div class="shimmer-wrapper">
-          <div class="shimmer-card"></div>
           <div class="shimmer-card"></div>
           <div class="shimmer-card"></div>
           <div class="shimmer-card"></div>
@@ -70,11 +75,53 @@
       </div>
     </main>
 
+    <!-- Section: Kalkulator Konversi Suhu Interaktif -->
+    <section class="calculator-section">
+      <div class="section-header">
+        <h3><i class="fa-solid fa-calculator"></i> Kalkulator Konversi Suhu</h3>
+      </div>
+      <div class="calc-card">
+        <div class="calc-inputs">
+          <div class="input-group">
+            <label for="calc-value">Nilai Suhu</label>
+            <input type="number" id="calc-value" value="0" step="any">
+          </div>
+          <div class="input-group">
+            <label for="calc-from">Dari Unit</label>
+            <select id="calc-from">
+              <option value="C" selected>Celsius (°C)</option>
+              <option value="F">Fahrenheit (°F)</option>
+              <option value="R">Reamur (°R)</option>
+              <option value="K">Kelvin (K)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <i class="fa-solid fa-right-left calc-swap-icon" id="btn-swap-units" title="Tukar Unit"></i>
+          </div>
+          <div class="input-group">
+            <label for="calc-to">Ke Unit</label>
+            <select id="calc-to">
+              <option value="C">Celsius (°C)</option>
+              <option value="F" selected>Fahrenheit (°F)</option>
+              <option value="R">Reamur (°R)</option>
+              <option value="K">Kelvin (K)</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result-display">
+          <span class="result-label">Hasil Konversi</span>
+          <h2 id="calc-result-value">32.00</h2>
+          <span id="calc-result-unit">°F</span>
+        </div>
+      </div>
+    </section>
+
     <footer class="app-footer">
-      <p>&copy; 2026 IndoStock. Data disediakan melalui Yahoo Finance API. Dibuat dengan jQuery & AJAX.</p>
+      <p>&copy; 2026 TempCast. Data cuaca real-time disediakan oleh Open-Meteo API. Dibuat dengan jQuery & AJAX.</p>
     </footer>
   </div>
 
+  <!-- Modal Detail Cuaca Kota -->
   <div class="modal-overlay" id="detail-modal">
     <div class="modal-content">
       <button class="modal-close" id="btn-close-modal">
@@ -82,33 +129,58 @@
       </button>
       <div class="modal-header">
         <div class="modal-title-group">
-          <h2 id="modal-stock-symbol">BBCA.JK</h2>
-          <span id="modal-stock-name">Bank Central Asia Tbk.</span>
+          <h2 id="modal-city-name">Nama Kota</h2>
+          <span id="modal-weather-desc">Kondisi Cuaca</span>
         </div>
-        <span id="modal-stock-price-tag">Rp --</span>
+        <span id="modal-temp-tag">-- °C</span>
       </div>
       <div class="modal-body">
+        <!-- Detail Info Cuaca -->
         <div class="price-stats-grid">
           <div class="stat-box">
-            <span class="stat-label">Perubahan</span>
-            <span class="stat-value" id="modal-change-val">--</span>
+            <span class="stat-label"><i class="fa-solid fa-temperature-half"></i> Suhu Semu (Feels Like)</span>
+            <span class="stat-value" id="modal-apparent-temp">-- °C</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Penutupan Sebelumnya</span>
-            <span class="stat-value" id="modal-prev-close">Rp --</span>
+            <span class="stat-label"><i class="fa-solid fa-droplet"></i> Kelembapan</span>
+            <span class="stat-value" id="modal-humidity">-- %</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Harga Pembukaan</span>
-            <span class="stat-value" id="modal-open-price">Rp --</span>
+            <span class="stat-label"><i class="fa-solid fa-wind"></i> Kecepatan Angin</span>
+            <span class="stat-value" id="modal-wind-speed">-- km/h</span>
           </div>
           <div class="stat-box">
-            <span class="stat-label">Volume Transaksi</span>
-            <span class="stat-value" id="modal-volume">--</span>
+            <span class="stat-label"><i class="fa-solid fa-cloud-rain"></i> Curah Hujan</span>
+            <span class="stat-value" id="modal-precipitation">-- mm</span>
           </div>
         </div>
 
+        <!-- Detail Konversi Suhu Lengkap -->
+        <div class="conversion-box">
+          <span class="chart-title">Konversi Skala Suhu</span>
+          <div class="conversion-grid">
+            <div class="conv-card">
+              <span class="conv-lbl">Celsius</span>
+              <span class="conv-val" id="detail-c">-- °C</span>
+            </div>
+            <div class="conv-card">
+              <span class="conv-lbl">Fahrenheit</span>
+              <span class="conv-val" id="detail-f">-- °F</span>
+            </div>
+            <div class="conv-card">
+              <span class="conv-lbl">Reamur</span>
+              <span class="conv-val" id="detail-r">-- °R</span>
+            </div>
+            <div class="conv-card">
+              <span class="conv-lbl">Kelvin</span>
+              <span class="conv-val" id="detail-k">-- K</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulasi Trend Grafik Suhu Harian -->
         <div class="chart-container">
-          <span class="chart-title">Visualisasi Tren Terakhir (Simulasi)</span>
+          <span class="chart-title">Tren Suhu Hari Ini (Simulasi 24 Jam)</span>
           <canvas id="sparkline-chart" height="150"></canvas>
         </div>
       </div>
