@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Weather Watcher - Tugas Akhir Javascript & jQuery</title>
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Aplikasi cuaca real-time menggunakan OpenWeatherMap API dengan jQuery AJAX, kondisional, dan fitur lengkap.">
+    <meta name="author" content="Gamelab Student">
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-decor">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">
+                    <i class="fas fa-cloud-sun"></i> Daily Weather Watcher
+                </h1>
+                <p class="subtitle">Pantau Cuaca di Kota Manapun Secara Real-Time</p>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="input-group">
+                    <i class="fas fa-map-marker-alt input-icon"></i>
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        class="city-input" 
+                        placeholder="Masukkan nama kota (contoh: Jakarta, Surabaya...)" 
+                        autocomplete="off"
+                    >
+                    <button type="button" id="searchBtn" class="btn btn-search">
+                        <i class="fas fa-search"></i> Cari Cuaca
+                    </button>
+                </div>
+                <div class="suggestions" id="suggestions"></div>
+            </div>
+        </section>
+
+        <!-- Weather Display Section -->
+        <section class="weather-section">
+            <div id="loadingSpinner" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Mengambil data cuaca...</p>
+            </div>
+
+            <div id="weatherContainer" class="weather-container" style="display: none;">
+                <!-- Weather Header Card -->
+                <div class="weather-card main-card">
+                    <div class="city-header">
+                        <h2 id="cityName" class="city-name"></h2>
+                        <p id="currentDate" class="date"></p>
+                    </div>
+
+                    <div class="weather-main">
+                        <div class="weather-icon-section">
+                            <i id="weatherIcon" class="weather-icon fas fa-cloud"></i>
+                        </div>
+                        <div class="weather-info">
+                            <div class="temperature">
+                                <span id="temperature" class="temp-value">--</span>
+                                <span class="temp-unit">°C</span>
+                            </div>
+                            <p id="weatherDescription" class="weather-desc"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Details Grid -->
+                <div class="weather-details-grid">
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-droplet"></i>
+                            <span>Kelembaban</span>
+                        </div>
+                        <div class="detail-value" id="humidity">-- %</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-wind"></i>
+                            <span>Kecepatan Angin</span>
+                        </div>
+                        <div class="detail-value" id="windSpeed">-- m/s</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-eye"></i>
+                            <span>Jarak Pandang</span>
+                        </div>
+                        <div class="detail-value" id="visibility">-- km</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-gauge"></i>
+                            <span>Tekanan Udara</span>
+                        </div>
+                        <div class="detail-value" id="pressure">-- hPa</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Suhu Maksimal</span>
+                        </div>
+                        <div class="detail-value" id="tempMax">-- °C</div>
+                    </div>
+
+                    <div class="detail-card">
+                        <div class="detail-header">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>Suhu Minimal</span>
+                        </div>
+                        <div class="detail-value" id="tempMin">-- °C</div>
+                    </div>
+                </div>
+
+                <!-- Weather Alert Section -->
+                <div id="weatherAlert" class="weather-alert" style="display: none;"></div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <p id="errorText"></p>
+            </div>
+
+            <!-- Initial State -->
+            <div id="initialState" class="initial-state">
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <p>Cari kota untuk melihat data cuaca</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search History -->
+        <section class="history-section">
+            <div class="history-container">
+                <h3 class="history-title">
+                    <i class="fas fa-history"></i> Riwayat Pencarian
+                </h3>
+                <div id="historyList" class="history-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
