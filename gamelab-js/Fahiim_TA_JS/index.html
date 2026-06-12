@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pencarian Film</title>
+    <title>Pencarian Film Premium</title>
+    <!-- Font Awesome untuk ikon premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,18 +14,61 @@
             <h1>Pencarian Film</h1>
             <p>Temukan film favoritmu dengan API film gratis. Cari berdasarkan judul lalu lihat detail dan rating.</p>
         </header>
+
+        <!-- Search Panel -->
         <section class="search-panel">
             <div class="search-box">
-                <input id="searchInput" type="text" placeholder="Masukkan judul film" autocomplete="off">
-                <button id="searchButton" type="button">Cari Film</button>
+                <input id="searchInput" type="text" placeholder="Masukkan judul film..." autocomplete="off">
+                <button id="searchButton" type="button"><i class="fa-solid fa-magnifying-glass"></i> Cari Film</button>
             </div>
             <div id="alertMessage" class="alert"></div>
         </section>
-        <section id="resultSection" class="result-section">
-            <div id="movieList" class="movie-list"></div>
+
+        <!-- Section Watchlist (Daftar Tontonan) -->
+        <section id="watchlistSection" class="watchlist-section hidden">
+            <h2 class="section-title"><i class="fa-solid fa-heart"></i> Daftar Tontonanku</h2>
+            <div id="watchlistList" class="watchlist-list"></div>
         </section>
-        <section id="movieDetail" class="movie-detail hidden"></section>
+
+        <!-- Section Rekomendasi Pilihan (Pemuatan Awal) -->
+        <section id="recommendationsSection" class="recommendations-section">
+            <h2 class="section-title"><i class="fa-solid fa-star"></i> Rekomendasi Pilihan</h2>
+            <div id="recommendationList" class="movie-list"></div>
+        </section>
+
+        <!-- Section Hasil Pencarian Terkelompok -->
+        <section id="resultSection" class="result-section hidden">
+            
+            <div id="moviesCategory" class="category-block hidden">
+                <h2 class="category-title"><i class="fa-solid fa-film"></i> Movies</h2>
+                <div id="moviesList" class="movie-list"></div>
+            </div>
+
+            <div id="seriesCategory" class="category-block hidden">
+                <h2 class="category-title"><i class="fa-solid fa-tv"></i> TV Series</h2>
+                <div id="seriesList" class="movie-list"></div>
+            </div>
+
+            <div id="gamesCategory" class="category-block hidden">
+                <h2 class="category-title"><i class="fa-solid fa-gamepad"></i> Games</h2>
+                <div id="gamesList" class="movie-list"></div>
+            </div>
+            
+        </section>
     </div>
+
+    <!-- Popup Modal Detail Film -->
+    <div class="modal-overlay" id="movieModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalBody" class="modal-body">
+                <!-- Konten Detail Film dimuat di sini -->
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="script.js"></script>
 </body>
